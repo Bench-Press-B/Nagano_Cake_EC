@@ -1,0 +1,43 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
+    <div class="container">
+      <a class="navbar-brand text-light" href="/"><span>LOGO</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+        <% if customer_signed_in? %>
+          <li>
+            <%= link_to "マイページ",class: 'btn nav-link text-light' %>
+          </li>
+          <li>
+            <%= link_to "商品一覧",class: 'btn nav-link text-light' %>
+          </li>
+          <li>
+            <%= link_to "カート",class: 'btn nav-link text-light' %>
+          </li>
+          <li>
+            <%= link_to "ログアウト", method: :delete,class: 'btn nav-link text-light' %>
+          </li>
+          <!--notice: ようこそcustomer.nameさん-->
+        <% else %>
+          <li>
+            <%= link_to "About",class: 'btn btn-light nav-link text-light' %>
+          </li>
+          <li>
+            <%= link_to "商品一覧",class: 'btn btn-light nav-link text-light' %>
+          </li>
+          <li>
+            <%= link_to "新規登録",class: 'btn btn-light nav-link text-light' %>
+          </li>
+          <li>
+            <%= link_to "ログイン",class: 'btn btn-light nav-link text-light' %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
