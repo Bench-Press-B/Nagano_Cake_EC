@@ -3,10 +3,55 @@
 <%= form_with model: @customer, url: customer_registration_path do |f| %>
   <%= render "customers/shared/error_messages", resource: resource %>
 
+
+  <div class="field mb-2">
+    <%= f.label :first_name, "（姓）" %>
+    <%= f.text_field :first_name, autofocus: true, required: true %>
+  </div>
+
+
+  <div class="field mb-2">
+    <%= f.label :last_name, "（名）" %>
+    <%= f.text_field :last_name, autofocus: true, required: true %>
+  </div>
+
+
+  <div class="field mb-2">
+    <%= f.label :kana_first_name, "(セイ)" %>
+    <%= f.text_field :kana_first_name, autofocus: true, required: true %>
+  </div>
+
+
+  <div class="field mb-2">
+    <%= f.label :kana_last_name, "(メイ)" %>
+    <%= f.text_field :kana_last_name, autofocus: true, required: true %>
+  </div>
+
+
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email, "メールアドレス" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
+
+
+  <div class="field">
+    <%= f.label :postal_code, "郵便番号(ハイフンなし)" %><br>
+    <%= f.text_field :postal_code %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :address, "住所" %><br>
+    <%= f.text_field :address %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :phone_number, "電話番号(ハイフンなし)" %><br>
+    <%= f.text_field :phone_number %>
+  </div>
+
+
 
   <div class="field">
     <%= f.label :password %>
