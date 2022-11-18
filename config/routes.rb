@@ -4,5 +4,14 @@ Rails.application.routes.draw do
   
   root to: "homes#top"
   devise_for :users
-  get "home/about"=>"homes#about"
+  get "home/about"=>"homes#about", as: "about"
+  
+  namespace :admin do
+    resources :customers, only:[:index,:show,:update]
+  end
+  
+  scope module: :public do
+    resources :customers, only: [:show,:edit,:update]
+  end
+   
 end
