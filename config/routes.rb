@@ -1,11 +1,20 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  devise_for :admin
-  devise_for :customers
-  
+  devise_for :admin, controllers: {
+    sessions:      'admin/sessions',
+    passwords:      'admin/passwords',
+    registrations: 'admin/registrations'
+  }
+
+  devise_for :customers, controllers: {
+    sessions: 'customers/sessions',
+    passwords: 'customers/passwords',
+    registrations: 'customers/registrations'
+  }
+
   root to: "homes#top"
-  get "home/about"=>"homes#about"
+  get "home/about"=>"homes#about", as: 'about'
   
   #admin
   namespace :admin do
