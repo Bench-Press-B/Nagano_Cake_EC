@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+
   devise_for :admin, controllers: {
     sessions:      'admin/sessions',
     passwords:      'admin/passwords',
@@ -26,10 +27,8 @@ Rails.application.routes.draw do
     resources :orders_details
   end
   
-  
   #public
-  scope module: :public do
-  
+  scope module: :public do  
     resources :customers
     resources :orders, only:[:index, :show, :update]
     resources :items
