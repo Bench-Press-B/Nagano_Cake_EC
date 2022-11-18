@@ -16,25 +16,26 @@ Rails.application.routes.draw do
 
   root to: "homes#top"
   get "home/about"=>"homes#about", as: 'about'
-  
+
   #admin
   namespace :admin do
-    resources :customers
+    resources :customers, only:[:index,:show,:edit,:update]
     resources :orders, only:[:index,:show,:update]
-    resources :items
-    resources :genres
-    resources :orders
-    resources :orders_details
+    resources :items, only:[:index,:new,:create,:show,:edit,:update]
+    resources :genres, only:[:index,:create,:edit,:update]
+    resources :orders, only:[:show,:update]
+    resources :orders_details, only:[:update]
   end
-  
+
   #public
-  scope module: :public do  
-    resources :customers
+  scope module: :public do
+    resources :customers, only:[:show,:edit,:update]
     resources :orders, only:[:index, :show, :update]
-    resources :items
-    resources :cart_items
+    resources :items, only:[:index,:show]
+    resources :cart_items, only:[:index,:update,:dastroy,:create]
+    delete "cart_items/all_destroy" => "public/cart_items#all_destroy", as: "all_destroy_cart_items"
     resources :shipping_addresses
-  
+
   end
-  
+
 end
