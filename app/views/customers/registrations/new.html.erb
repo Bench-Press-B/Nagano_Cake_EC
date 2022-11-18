@@ -36,19 +36,19 @@
 
   <div class="field">
     <%= f.label :postal_code, "郵便番号(ハイフンなし)" %><br>
-    <%= f.text_field :postal_code %>
+    <%= f.text_field :postal_code, autofocus: true, required: true %>
   </div>
 
 
   <div class="field">
     <%= f.label :address, "住所" %><br>
-    <%= f.text_field :address %>
+    <%= f.text_field :address, autofocus: true, required: true %>
   </div>
 
 
   <div class="field">
     <%= f.label :phone_number, "電話番号(ハイフンなし)" %><br>
-    <%= f.text_field :phone_number %>
+    <%= f.text_field :phone_number, autofocus: true, required: true %>
   </div>
 
 
