@@ -21,21 +21,21 @@
             <%= link_to "ジャンル一覧",class: 'btn nav-link text-light' %>
           </li>
           <li>
-            <%= link_to "ログアウト", method: :delete,class: 'btn nav-link text-light' %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete,class: 'btn nav-link text-light' %>
           </li>
           <!--notice: ようこそcustomer.nameさん-->
         <% else %>
           <li>
-            <%= link_to "About",class: 'btn btn-light nav-link text-light' %>
+            <%= link_to "About",class: 'btn nav-link text-light mr-5' %>
           </li>
           <li>
-            <%= link_to "商品一覧",class: 'btn btn-light nav-link text-light' %>
+            <%= link_to "商品一覧",class: 'btn nav-link text-light mr-5' %>
           </li>
           <li>
-            <%= link_to "新規登録",class: 'btn btn-light nav-link text-light' %>
+            <%= link_to "新規登録", new_admin_registration_path, class: 'btn nav-link text-light mr-5' %>
           </li>
           <li>
-            <%= link_to "ログイン",class: 'btn btn-light nav-link text-light' %>
+            <%= link_to "ログイン",　new_admin_session_path, class: 'btn nav-link text-light mr-5' %>
           </li>
         <% end %>
         </ul>

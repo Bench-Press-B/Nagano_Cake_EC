@@ -7,12 +7,12 @@ Rails.application.routes.draw do
   }
 
   devise_for :customers, controllers: {
-    sessioins: 'customers/sessions',
+    sessions: 'customers/sessions',
     passwords: 'customers/passwords',
     registrations: 'customers/registrations'
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   root to: "homes#top"
-  get "home/about"=>"homes#about"
+  get "home/about"=>"homes#about", as: 'about'
 end
