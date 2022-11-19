@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+   <h2>会員情報編集</h2>
+    <%= form_with model:@user, local:true do |f| %>
+    <table>
+      <tr>
+       <td>会員ID</td>
+       <td><%= f.text_field :name, class: "form-control name" %></td>
+     </tr>
+     <tr>
+       <td>氏名</td>
+       <td><%= f.text_field :name, class: "form-control name" %></td>
+       <td><%= f.text_field :name, class: "form-control name" %></td>
+     </tr>
+     <tr>
+       <td>フリガナ</td>
+       <td><%= f.text_field :name, class: "form-control name" %></td>
+       <td><%= f.text_field :name, class: "form-control name" %></td>
+     </tr>
+     <tr>
+       <td>郵便番号</td>
+       <td><%= f.text_field :name, class: "form-control name" %></td>
+     </tr>
+     <tr>
+       <td>住所</td>
+       <td><%= f.text_field :name, class: "form-control name" %></td>
+     </tr>
+     <tr>
+       <td>電話番号</td>
+       <td><%= f.text_field :name, class: "form-control name" %></td>
+     </tr>
+     <tr>
+       <td>メールアドレス</td>
+       <td><%= f.text_field :name, class: "form-control name" %></td>
+     </tr>
+     <tr>
+       <td>メールアドレス</td>
+       <td><%= f.text_field :name, class: "form-control name" %></td>
+     </tr>
+    </table>
+  </div>
+</div>
