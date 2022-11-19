@@ -31,8 +31,8 @@ Rails.application.routes.draw do
 
   #public
   scope module: :public do
-    resources :customers, only:[:show,:edit,:update]
-    resources :orders, only:[:index, :show, :update]
+    resources :customers, only:[:index,:show,:edit,:update]
+    resources :orders, only:[:new,:index,:show,:create]
     resources :items, only:[:index,:show]
     resources :cart_items, only:[:index,:update,:dastroy,:create]
     delete "cart_items/all_destroy" => "public/cart_items#all_destroy", as: "all_destroy_cart_items"
