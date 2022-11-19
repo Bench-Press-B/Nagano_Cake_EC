@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   root to: "homes#top"
   get "home/about"=>"homes#about", as: 'about'
-  
+
   #admin
   namespace :admin do
     resources :customers
@@ -26,15 +26,15 @@ Rails.application.routes.draw do
     resources :orders
     resources :orders_details
   end
-  
+
   #public
-  scope module: :public do  
+  scope module: :public do
     resources :customers
-    resources :orders, only:[:index, :show, :update]
+    resources :orders, only:[:new,:index,:show,:create]
     resources :items
     resources :cart_items
     resources :shipping_addresses
-  
+
   end
-  
+
 end
