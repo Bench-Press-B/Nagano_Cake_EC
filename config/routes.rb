@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
   #admin
   namespace :admin do
-    resources :customers
+    resources :customers, only[:show,:edit,:update]
+    get "customers/unsubscribe" =>"customers#unsubscribe", as: "unsubscribe"
+    patch "customers/withdraw" => "customers#withdraw", as: "withdraw"
     resources :orders, only:[:index,:show,:update]
     resources :items
     resources :genres, only: [:index, :create, :edit]
@@ -22,9 +24,9 @@ Rails.application.routes.draw do
   end
 
   #public
-  scope module: :public do
-    resources :customers
-    resources :orders, only:[:index, :show, :update]
+  scope module: :public do  
+    resources :customers, only:[:index,:show,:edit,:update]
+    resources :orders, only:[:new,:index,:show,:create]
     resources :items
     resources :cart_items
     resources :shipping_addresses

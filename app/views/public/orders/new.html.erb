@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h2 class="head-line title_h2 text-center">注文情報入力</h2>
+    <div>
+      <%#= form_with :model => @order, url:log_customers_orders_path, method: :post, local: true  do |f| %>
+        <h3 class="text-center">支払い方法</h3>
+          <div class="radio">
+            <%#= f.radio_button :payment_method, :"クレジットカード", checked: true %>
+            <span>クレジットカード</span>
+          </div>
+          <div class="radio">
+            <%#= f.radio_button :payment_method, :"銀行振込" %>
+            <span>銀行振り込み</span>
+          </div>
+
+        <h3>お届け先</h3>
+          <div class="radio">
+            <%#= f.radio_button :addresses, "配送先", checked: true  %>
+            <span>ご自身の住所</span><br>
+            <!--ここに自分の配送先を入れる-->
+            <br>
+            <!--ここに自分の姓と名前を入れる-->
+          </div>
+
+          <%# if @shipping_addresses != [] %>  <!--もし配送先がない場合-->
+          <div class="radio">
+            <%#= f.radio_button :addresses, "shipping_addresses" %>  <!--登録してあるshipping_addressesから引っ張ってくる-->
+              <span>登録済住所から選択</span><br>
+          </div>
+          <%# end %>
+
+          <div class="radio">
+            <%#= f.radio_button :addresses, "new_address" %>
+            <span>新しいお届け先</span><br>
+            <div class="form-group">
+              <%#= f.label :"郵便番号(ハイフンなし)", class: "control-label" %>
+              <%#= f.text_field :postal_code, class: "form-control-static postal_code" %>
+            </div>
+            <div class="form-group">
+              <%#= f.label :"住所", class: "control-label" %>
+              <%#= f.text_field :address, class: "form-control-static address" %>
+            </div>
+            <div class="form-group">
+              <%#= f.label :"宛名", class: "control-label" %>
+              <%#= f.text_field :name, class: "form-control-static" %>
+            </div>
+          </div>
+
+          <div class="btns">
+            確認画面へ進む
+          </div>
+      <%# end %>
+    </div>
+    <%# else %>
+      <!--仮入力もし-->
+      <p>お客様のショッピングカートに商品はありませんので注文情報の入力ができません。</p>
+    <%# end %>
+  </div>
+</div>
