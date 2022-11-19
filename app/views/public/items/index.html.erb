@@ -4,18 +4,20 @@
      ジャンル検索欄
     </div>
     <div class='col-md-10'>
-      <div class="form-inline">
+      <div class="form-inline mb-2">
         <h2>商品一覧</h2>
         <h5>（全x件）</h5>
       </div>
-      <div class="form-inlne">
+      <div class="d-flex flex-row flex-wrap">
         <% @items.each do |item| %>
-          <%= image_tag item.image, size: "300x150" %>
-          <%= item.name %>
-          <%= (item.non_taxed_price * 1.1).floor %>
+          <div class="flex-column mb-5 mr-3">
+            <div><%= image_tag item.get_image, size: "220x120" %></div>
+            <div><%= item.name %></div>
+            <div>¥<%= (item.non_taxed_price * 1.1).floor.to_s(:delimited) %></div>
+          </div>
         <% end %>
+        <%= paginate @items %>
       </div>
-      <%= paginate @items %>
     </div>
   </div>
 </div>
