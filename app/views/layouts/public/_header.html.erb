@@ -9,25 +9,25 @@
         <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
           <li>
-            <%= link_to "マイページ",class: 'btn nav-link text-light mr-5' %>
+            <%= link_to "マイページ", customer_path(current_customer), class: 'btn nav-link text-light mr-5' %>
           </li>
           <li>
-            <%= link_to "商品一覧",class: 'btn nav-link text-light mr-5' %>
+            <%= link_to "商品一覧", items_path, class: 'btn nav-link text-light mr-5' %>
           </li>
           <li>
-            <%= link_to "カート",class: 'btn nav-link text-light mr-5' %>
+            <%= link_to "カート", cart_items_path, class: 'btn nav-link text-light mr-5' %>
           </li>
           <li>
             <%= link_to "ログアウト", destroy_customer_session_path, method: :delete,class: 'btn nav-link text-light mr-5' %>
           </li>
 
-          <h4>ようこそ、<%= customer.name %>さん！</h4>
+          <!--<h4>ようこそ、customer.name さん！</h4>-->
         <% else %>
           <li>
-            <%= link_to "About", root_path, class: 'btn nav-link text-light mr-5' %>
+            <%= link_to "About", about_path, class: 'btn nav-link text-light mr-5' %>
           </li>
           <li>
-            <%= link_to "商品一覧", root_path, class: 'btn nav-link text-light mr-5' %>
+            <%= link_to "商品一覧", items_path, class: 'btn nav-link text-light mr-5' %>
           </li>
           <li>
             <%= link_to "新規登録", new_customer_registration_path, class: 'btn nav-link text-light mr-5' %>
