@@ -14,22 +14,25 @@ Rails.application.routes.draw do
 
   #admin
   namespace :admin do
+
     resources :customers, only:[:show,:edit,:update]
     get "customers/unsubscribe" =>"customers#unsubscribe", as: "unsubscribe"
     patch "customers/withdraw" => "customers#withdraw", as: "withdraw"
+
     resources :orders, only:[:index,:show,:update]
-    resources :items
-    resources :genres, only: [:index, :create, :edit]
-    resources :orders
-    resources :orders_details
+    resources :items, only:[:index,:new,:create,:show,:edit,:update]
+    resources :genres, only:[:index,:create,:edit,:update]
+    resources :orders, only:[:show,:update]
+    resources :orders_details, only:[:update]
   end
 
   #public
   scope module: :public do
-    resources :customers, only:[:index,:show,:edit,:update]
-    resources :orders, only:[:new,:index,:show,:create]
-    resources :items
-    resources :cart_items
+    resources :customers, only:[:show,:edit,:update]
+    resources :orders, only:[:index, :show, :update]
+    resources :items, only:[:index,:show]
+    resources :cart_items, only:[:index,:update,:dastroy,:create]
+    delete "cart_items/all_destroy" => "public/cart_items#all_destroy", as: "all_destroy_cart_items"
     resources :shipping_addresses
 
   end

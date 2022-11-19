@@ -1,44 +1,49 @@
 <div class='container'>
   <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
-    <div class="form-inline">
-      <h2>商品一覧</h2>
-      <%= link_to new_admins_item_path do %>
-        <i class="fa-thin fa-circle-plus"></i>
-        <%#　①アイコンが表示されない　②右寄せできない　%>
-      <% end %>
-      
-    </div>
-    <table class='table table-hover table-inverse'>
-      <thead>
-        <tr>
-          <th>商品ID</th>
-          <th>商品名</th>
-          <th>税抜価格</th>
-          <th>ステータス</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @items.each do |item| %>
-          <tr>
-            <td><%= items.ID %></td>
-            <td>
-              <%= link_to admins_item(item) do %>
-                <%= items.name %>
-              <% end %>
-            </td>
-            <td><%= items.non_taxed_price %></td>
-            <td>
-                <%= items.genre.name %>
-            </td>
-            <td>
-              ステータス
-            </td>
-          </tr>
+    <div class="col-sm-12 px-5 px-sm-0">
+      <div class="form-inline">
+        <h2>商品一覧</h2>
+        <%= link_to new_admin_item_path do %>
+          <i class="fa-thin fa-circle-plus"></i>
+          <%#　①アイコンが表示されない　②右寄せできない　%>
         <% end %>
-        <%= paginate @items %>
-      </tbody>
-    </table>
+
+      </div>
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>税抜価格</th>
+            <th>ジャンル</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= item.id %></td>
+              <td>
+                <%= link_to admin_item_path(item) do %>
+                  <%= item.name %>
+                <% end %>
+              </td>
+              <td><%= item.non_taxed_price.to_s(:delimited) %></td>
+              <td>
+                  <%= item.genre.name %>
+              </td>
+              <td>
+                <% if item.is_active? %>
+                  <%= link_to '販売中', admin_item_path(item, item: {is_active: false}), method: :patch %>
+                <% else %>
+                  <%= link_to '販売停止中', admin_item_path(item, item: {is_active: true}), method: :patch %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          <%= paginate @items %>
+        </tbody>
+      </table>
   </div>
 </div>
 
