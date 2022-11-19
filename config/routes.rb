@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   #public
   scope module: :public do  
     resources :customers, only:[:index,:show,:edit,:update]
-    resources :orders, only:[:index, :show, :update]
+    resources :orders, only:[:new,:index,:show,:create]
     resources :items
     resources :cart_items
     resources :shipping_addresses
