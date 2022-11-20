@@ -14,7 +14,7 @@
         <td>郵便番号</td><td><%= @customer.postal_code %></td>
       </tr>
       <tr>
-        <td>住所</td><td><%= @customer.shipping_addresses %></td>
+        <td>住所</td><td><%= @customer.address %></td>
       </tr>
       <tr>
         <td>電話番号</td><td><%= @customer.phone_number %></td>
@@ -26,7 +26,7 @@
         <td>会員ステータス</td><td><%= @customer.status %></td>
       </tr>
     </table>
-    <%= link_to "編集する",customer_edit_path,　class: "btn btn-success" %>
+    <%= link_to "編集する",edit_admin_customer_path,　class: "btn btn-success" %>
     <%= link_to "注文履歴一覧",customer_edit_path,　class: "btn btn-primary" %>
   </div>
 </div>
