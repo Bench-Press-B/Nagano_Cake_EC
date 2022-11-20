@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
     <div class="container">
-      <a class="navbar-brand text-light" href="root_path"><span>LOGO</span></a>
+      <a class="navbar-brand text-light" href="/"><span>LOGO</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -9,19 +9,19 @@
         <ul class="navbar-nav ml-auto">
         <% if admin_signed_in? %>
           <li>
-            <%= link_to "商品一覧", admin_items_path, class: 'btn nav-link text-light' %>
+            <%= link_to "商品一覧", admin_items_path, class: 'btn nav-link text-light mr-3' %>
           </li>
           <li>
-            <%= link_to "会員一覧", admin_customers_path, class: 'btn nav-link text-light' %>
+            <%= link_to "会員一覧", admin_customers_path, class: 'btn nav-link text-light mr-3' %>
           </li>
           <li>
-            <%= link_to "注文履歴一覧", admin_orders_path, class: 'btn nav-link text-light' %>
+            <%= link_to "注文履歴一覧", admin_orders_path, class: 'btn nav-link text-light mr-3' %>
           </li>
           <li>
-            <%= link_to "ジャンル一覧", admin_genres_path, class: 'btn nav-link text-light' %>
+            <%= link_to "ジャンル一覧", admin_genres_path, class: 'btn nav-link text-light mr-3' %>
           </li>
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete,class: 'btn nav-link text-light' %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete,class: 'btn nav-link text-light mr-3' %>
           </li>
         <% else %>
           <li>
