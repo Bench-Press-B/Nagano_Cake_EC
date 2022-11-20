@@ -1,26 +1,40 @@
 <div class="container">
   <div class="row">
-    <div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-6'>
-      <p>
-        ようこそ、ながのCAKEへ！</br>
-        このサイトは、ケーキ販売のECサイトになります。</br>
-        会員でない方も商品の閲覧はできますが、</br>
-        購入には会員登録が必要になります。
-      </p>
+    <div class='mx-auto col-12 col-sm-10 col-lg-8 col-xl-6'>
 
-
-
-
-
-
-      <div class="btn-wrapper col-10 mx-auto">
-        <div class="row">
-          <%= link_to 'Log in', new_customer_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
-        </div>
-        <div class="row">
-          <%= link_to 'Sign up', new_customer_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
+      <div class="card">
+        <%= image_tag 'cake1.jpg', size: '400x350', class: 'card-img' %>
+        <div class="card-img-overlay font-weight-bold mt-5">
+          <p class="text-black text-center">
+            ようこそ、ながのCAKEへ！</br>
+            このサイトは、ケーキ販売のECサイトになります。</br>
+            会員でない方も商品の閲覧はできますが、</br>
+            購入には会員登録が必要になります。
+          </p>
         </div>
       </div>
+
+      <h1 class="font-weight-bold mt-3">新着商品</h1>
+
+
+      <% @items.each do |item| %>
+      <div class="col-12">
+        <div>
+          <%= image_tag item.get_image, size:'100x100' %>
+        </div>
+        <div>
+          <%= item.name %>
+        </div>
+        <div>
+          ￥<%= item.non_taxed_price %>
+        </div>
+      </div>
+      <% end %>
+
+      <div class="text-right">
+        <%= link_to '全ての商品を見る>', items_path%>
+      </div>
+
     </div>
   </div>
 </div>
