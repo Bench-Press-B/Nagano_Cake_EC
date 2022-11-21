@@ -12,15 +12,16 @@
         </tr>
       </thead>
       <tbody>
-        <%= @order.each do |order| %>
+        <% @orders.each do |order| %>
         <tr>
           <td><%= order.created_at %></td>
           <td><%= order.address %></td>
-          <td><!-- itemの商品名 --></td>
+          <td></td>
           <td><%= order.total_payment %></td>
           <td><%= order.status %></td>
           <td><%= link_to "表示する",about_path,class: "btn btn-primary" %></td>
         </tr>
+        <% end %>
       </tbody>
     </table>
   </div>

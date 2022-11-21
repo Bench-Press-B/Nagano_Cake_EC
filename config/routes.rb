@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 
-  devise_for :admin, controllers: {
+  devise_for :admins, controllers: {
     sessions: 'admin/sessions',
     passwords: 'admin/passwords',
     registrations: 'admin/registrations'
@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 
   #admin
   namespace :admin do
-    resources :customers, only:[:show,:edit,:update, :index]
     resources :customers, only:[:index,:show,:edit,:update]
     resources :orders, only:[:index,:show,:update]
     resources :items, only:[:index,:new,:create,:show,:edit,:update]
@@ -35,7 +34,7 @@ Rails.application.routes.draw do
     patch "customers/:id/withdraw" => "customers#withdraw", as: "withdraw"
     resources :orders, only:[:new,:index,:show,:create] do
      collection do
-       post 'confil,'
+       post 'confirm'
        get 'thanx'
      end
    end
