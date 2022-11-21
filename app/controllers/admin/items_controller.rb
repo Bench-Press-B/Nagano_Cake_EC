@@ -7,8 +7,6 @@ class Admin::ItemsController < ApplicationController
   def new
     @item = Item.new
     @genres = Genre.all
-    #この下いらない
-    @genre = Genre.new
   end
 
   def create

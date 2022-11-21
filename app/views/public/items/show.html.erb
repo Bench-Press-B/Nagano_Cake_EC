@@ -1,22 +1,35 @@
 <div class='container px-5 px-sm-0'>
-  <div class='row'>
-    <div class='col-md-2'>
-     ジャンル検索欄
+  <div class='row mt-5'>
+    <div class='col-md-3'>
+      <table class="table table-bordered">
+        <thead class="text-center">
+          <tr>
+            <th>ジャンル検索</th>
+          </tr>
+        </thead>
+        <tbody class="table-borderless">
+          <% @genres.each do |genre| %>
+            <tr>
+              <td><%= genre.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
-    <div class='col-md-10'>
-      <div class="d-flex flex-row">
-        <div><%= image_tag @item.get_image, size: "400x300" %></div>
-        <div class="flex-column">
-          <h4><%= @item.name %></h4>
-          <p><%= @item.explanation %></p>
-          <p>¥<%= (@item.non_taxed_price * 1.1).floor.to_s(:delimited) %>(税込)</p>
-          <div class="flex-row">
-            <%= form_with model:@cart_items, url:cart_item_path() %>
-          </div>
-        </div>
-        
-      </div>
-      </div>
+
+    <div class='col-md-4'>
+      <%= image_tag @item.get_image, size: "350x200" %>
+    </div>
+    <div class="col-md-5">
+      <h3 class="mt-2"><strong><%= @item.name %></strong></h3>
+      <p class="mb-5"><%= @item.explanation %></p>
+      <p class="pt-5"><strong>¥<%= (@item.non_taxed_price * 1.1).floor.to_s(:delimited) %>(税込)</strong></p>
+      <%= form_with model:@cart_items, local:true do |f| %>
+        <%= f.select :quantity, [1,2,3,4,5,6,7,8,9,10], {include_blank: '個数選択'}, class:'mr-5' %>
+        <%# select-box?の種類が違う　%>
+        <%= f.submit "カートに入れる", class: 'btn btn-success' %>
+      <% end %>
+
     </div>
   </div>
 </div>
