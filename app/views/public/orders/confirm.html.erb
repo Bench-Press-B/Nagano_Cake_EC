@@ -15,17 +15,17 @@
           <% @cart_items.each do |cart| %>
             <tr>
               <td class="text-left">
-                <%= attachment_image_tag( cart.item, :image, size: "60x50") %>
+                <%= image_tag cart.item.get_image, size: "220x120" %>
                 <%= cart.item.name %>
               </td>
               <td class="text-right">
-                ¥<%= cart.item.tax_in_price.to_s(:delimited) %>
+                ¥<%= (cart.item.non_taxed_price * 1.1).floor.to_s(:delimited, delimiter: ',') %>
               </td>
               <td class="text-right">
-                  <%= cart.count %>
+                  <%= cart.quantity %>
               </td>
               <td class="text-right">
-                ¥<%= sub_price(cart).to_s(:delimited) %>
+                ¥<%= cart.subtotal.floor.to_s(:delimited, delimiter: ',') %>
               </td>
             </tr>
         <% end %>
@@ -37,15 +37,15 @@
       <table class="table">
           <tr>
             <th>送料</th>
-            <td class="text-right col-xs-5">¥<%= @order.shipping_cost %></td>
+            <td class="text-right col-xs-5">¥<%= @order.postage %></td>
           </tr>
           <tr>
             <th class="info">商品合計</th>
-            <td class="text-right">¥<%= total_price(@cart_items).to_s(:delimited) %></td>
+            <td class="text-right">¥<%#= @orders.total_price.to_s(:delimited) %></td>
           </tr>
           <tr>
             <th class="info">請求金額</th>
-            <td class="text-right">¥<%= billing(@order).to_s(:delimited) %></td>
+            <td class="text-right">¥<%#= billing(@order).to_s(:delimited) %></td>
           </tr>
       </table>
     </div>
@@ -78,7 +78,7 @@
         <%= f.hidden_field :postal_code%>
         <%= f.hidden_field :address%>
         <%= f.hidden_field :name%>
-        <%= f.hidden_field :total_payment%>
+        <%= f.hidden_field :total_price%>
         <%= f.submit '注文を確定する', class:'btn btn-success'%>
       <% end %>
     </h3>

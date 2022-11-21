@@ -4,7 +4,7 @@
     <h2 class="head-line title_h2 text-center">注文情報入力</h2>
     <% if current_customer.cart_items.present? %>
     <div>
-      <%= form_with :model => @order, method: :post, local: true  do |f| %>
+      <%= form_with :model => @order, url: confirm_orders_path, method: :post, local: true  do |f| %>
         <h3 class="text-center">支払い方法</h3>
           <div class="radio">
             <%= f.radio_button :payment_method, :"クレジットカード", checked: true %>
@@ -17,7 +17,7 @@
 
         <h3>お届け先</h3>
           <div class="radio">
-            <%= f.radio_button :addresses, "配送先", checked: true  %>
+            <%= f.radio_button :addresses, "1", checked: true  %>
             <span>ご自身の住所</span><br>
             <!--ここに自分の配送先を入れる-->
             <%= "〒#{current_customer.postal_code} #{current_customer.address}"%>
@@ -28,13 +28,13 @@
 
           <% if @shipping_addresses != [] %>  <!--もし配送先がない場合-->
           <div class="radio">
-            <%= f.radio_button :addresses, "shipping_addresses" %>  <!--登録してあるshipping_addressesから引っ張ってくる-->
+            <%= f.radio_button :addresses, "2" %>  <!--登録してあるshipping_addressesから引っ張ってくる-->
               <span>登録済住所から選択</span><br>
           </div>
           <% end %>
 
           <div class="radio">
-            <%= f.radio_button :addresses, "new_address" %>
+            <%= f.radio_button :addresses, "3" %>
             <span>新しいお届け先</span><br>
             <div class="form-group">
               <%= f.label :"郵便番号(ハイフンなし)", class: "control-label" %>
