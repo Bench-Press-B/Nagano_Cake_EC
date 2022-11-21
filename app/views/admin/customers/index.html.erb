@@ -1,0 +1,24 @@
+<div class='container'>
+  <div class='row'>
+   <table class='table'>
+    <thead>
+     <tr>
+       <th>会員ID</th>
+       <th>氏名</th>
+       <th>メールアドレス</th>
+       <th>ステータス</th>
+     </tr>
+    </thead>
+    <tbody>
+      <% @customer.each do |customer| %>
+       <tr>
+         <td><%= customer.id %></td>
+         <td><%= customer.full_name %></td>
+         <td><%= customer.email %></td>
+         <td><%= customer.status %></td>
+       </tr>
+       <% end %>
+     </tbody>
+   </table>
+  </div>
+</div>
