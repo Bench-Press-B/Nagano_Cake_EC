@@ -6,17 +6,11 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.orders.all
-    @order_detail = Order_detail.where(customer:current_customer)
   end
 
   def show
     @order = Order.find(params[:id])
     @order_details = @order.order_details
-  end
-
-  def create
-    @order = current_customer.orders.new(order_params)
-    @order.save
   end
 
   def thanx
@@ -58,6 +52,28 @@ class Public::OrdersController < ApplicationController
         render :new
       end
     end
+  end
+
+  def create
+    @order = current_customer.orders.new(order_params)
+    @order.save
+
+    if params[:order][:ship] =="1"
+      current_customer.address.create(address_params)
+    end
+
+    @cart_items = current_customer.cart_items
+    @cart_items.each do |cart_item|
+      @order_detail = OrderDetail.new
+      @order_detail.item_id = cart_item.item_id
+      @order_detail.order_id = @order.id
+      @order_detail.quantity = cart_item.quantity
+      @order_detail.taxed_price = (cart_item.item.non_taxed_price * 1.1) * cart_item.quantity
+      @order_detail.save
+      end
+    @cart_items.destroy_all
+
+    redirect_to thanx_orders_path
   end
 
   private
