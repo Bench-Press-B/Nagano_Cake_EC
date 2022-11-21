@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   #admin
   namespace :admin do
+    resources :customers, only:[:show,:edit,:update, :index]
     resources :customers, only:[:index,:show,:edit,:update]
     resources :orders, only:[:index,:show,:update]
     resources :items, only:[:index,:new,:create,:show,:edit,:update]
@@ -32,7 +33,12 @@ Rails.application.routes.draw do
     resources :customers, only:[:show,:edit,:update]
     get "customers/:id/unsubscribe" => "customers#unsubscribe", as: "unsubscribe"
     patch "customers/:id/withdraw" => "customers#withdraw", as: "withdraw"
-    resources :orders, only:[:new,:index,:show,:create]
+    resources :orders, only:[:new,:index,:show,:create] do
+     collection do
+       post 'confil,'
+       get 'thanx'
+     end
+   end
     resources :items, only:[:index,:show]
     resources :cart_items, only:[:index,:update,:dastroy,:create]
     delete "cart_items/all_destroy" => "public/cart_items#all_destroy", as: "all_destroy_cart_items"
