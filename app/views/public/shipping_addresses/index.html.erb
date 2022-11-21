@@ -1,0 +1,28 @@
+<div class ="container">
+  <div class = "row">
+    <%= render 'form', address: @newaddress %>
+    <table class ="table table-border">
+      <thead>
+        <td>郵便番号</td>
+        <td>住所</td>
+        <td>宛名</td>
+        <td></td>
+      </thead>
+      <tbody>
+        <% @address.each do |address| %>
+        <tr>
+          <td><%= address.postal_code %></td>
+          <td><%= address.address %></td>
+          <td><%= address.name %></td>
+          <td>
+            <%= link_to "編集する",about_path, class: "btn btn-success" %>
+          <!--　editページに移動できない -->
+            <%= link_to "削除する",about_path ,method: :delete, data: {confirm: "削除してよろしいですか？"}, class: "btn btn-danger" %>
+          <!--　消去できない -->
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
