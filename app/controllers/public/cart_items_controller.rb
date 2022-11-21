@@ -1,7 +1,8 @@
 class Public::CartItemsController < ApplicationController
 
   def index
-    @cart_items = CartItem.where(customer:current_customer)
+    @cart_items = current_customer.cart_items
+    @total_price = 0
   end
 
   def create
@@ -10,7 +11,7 @@ class Public::CartItemsController < ApplicationController
     @cart_item.quantity = 5
     @old_cart_item = CartItem.find_by(item: @cart_item.item)
     if @old_cart_item.present? and @cart_item.valid?
-      @cart_item.count += @old_cart_item.count
+      @cart_item.quantity += @old_cart_item.count
       @old_cart_item.destroy
     end
     if @cart_item.save
@@ -22,7 +23,7 @@ class Public::CartItemsController < ApplicationController
 
   def update
     @cart_item = CartItem.find(params["id"])
-    @cart_item.update(count: params[:cart_item][:count].to_i)
+    @cart_item.update(quantity: params[:cart_item][:quantity].to_i)
     @cart_item.save
     redirect_to cart_items_path
   end
