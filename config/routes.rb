@@ -20,8 +20,6 @@ Rails.application.routes.draw do
   #admin
   namespace :admin do
     resources :customers, only:[:show,:edit,:update, :index]
-    get "customers/unsubscribe" =>"customers#unsubscribe", as: "unsubscribe"
-    patch "customers/withdraw" => "customers#withdraw", as: "withdraw"
     resources :orders, only:[:index,:show,:update]
     resources :items, only:[:index,:new,:create,:show,:edit,:update]
     resources :genres, only:[:index,:create,:edit,:update]
@@ -31,7 +29,9 @@ Rails.application.routes.draw do
 
   #public
   scope module: :public do
-    resources :customers, only:[:index,:show,:edit,:update]
+    resources :customers, only:[:show,:edit,:update]
+    get "customers/unsubscribe" =>"customers#unsubscribe", as: "unsubscribe"
+    patch "customers/withdraw" => "customers#withdraw", as: "withdraw"
     resources :orders, only:[:new,:index,:show,:create] do
       collection do
           post 'confirm'
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
         end
       end
     resources :items, only:[:index,:show]
-    resources :cart_items, only:[:index,:update,:dastroy,:create]
+    resources :cart_items, only:[:index,:update,:destroy,:create]
     delete "cart_items/all_destroy" => "public/cart_items#all_destroy", as: "all_destroy_cart_items"
 
     resources :shipping_addresses, only:[:index,:edit,:create,:update,:destroy]

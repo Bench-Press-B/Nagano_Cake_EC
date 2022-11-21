@@ -31,7 +31,7 @@ class Public::OrdersController < ApplicationController
 
     # total_priceに請求額を入れる
     @order.total_price = billing(@order)
-    
+
     # addressesに1が入っていれば（自宅）
     if params[:order][:addresses] == "1"
       @order.postal_code = current_customer.postal_code
@@ -68,14 +68,6 @@ class Public::OrdersController < ApplicationController
 
   def customer_params
     params.require(:order_detail).permit(:taxed_price, :quantity, :status, :order_id, :item_id)
-  end
-
-  def billing(order)
-    total_price(@cart_items = current_customer.cart_items) + postage
-  end
-
-  def subtotal
-    (item.non_taxed_price * 1.1) *quantity
   end
 
 end
