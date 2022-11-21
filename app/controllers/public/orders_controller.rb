@@ -29,7 +29,7 @@ class Public::OrdersController < ApplicationController
       payment_method: params[:order][:payment_method])
 
     # total_priceに請求額を入れる
-    @order.total_price = @cart_items
+    @order.total_price = billing(@order)
     
     # addressesに1が入っていれば（自宅）
     if params[:order][:addresses] == "1"
@@ -71,7 +71,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def billing(order)
-    total_price(current_cart) + postage
+    total_price(@cart_items = current_customer.cart_items) + postage
   end
 
   def subtotal
