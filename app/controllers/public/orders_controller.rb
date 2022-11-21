@@ -29,24 +29,24 @@ class Public::OrdersController < ApplicationController
       customer: current_customer,
       payment_method: params[:order][:payment_method])
 
-    # total_paymentに請求額を入れる billingはhelperで定義
-    @order.total_payment = billing(@order)
-
-    # my_addressに1が入っていれば（自宅）
-    if params[:order][:my_address] == "1"
+    # total_priceに請求額を入れる
+    @order.total_price = billing(@order)
+    
+    # addressesに1が入っていれば（自宅）
+    if params[:order][:addresses] == "1"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
-      @order.name = full_name(current_customer)
+      @order.name = current_customer.full_name
 
-    # my_addressに2が入っていれば（配送先一覧）
-    elsif params[:order][:my_address] == "2"
+    # addressesに2が入っていれば（配送先一覧）
+    elsif params[:order][:addresses] == "2"
       ship = Address.find(params[:order][:address_id])
       @order.postal_code = ship.postal_code
       @order.address = ship.address
       @order.name = ship.name
 
-    # my_addressに3が入っていれば(新配送先)
-    elsif params[:order][:my_address] == "3"
+    # addressesに3が入っていれば(新配送先)
+    elsif params[:order][:addresses] == "3"
       @order.postal_code = params[:order][:postal_code]
       @order.address = params[:order][:address]
       @order.name = params[:order][:name]
@@ -59,15 +59,23 @@ class Public::OrdersController < ApplicationController
       end
     end
   end
-  
+
   private
-  
+
   def order_params
-    params.require(:order).permit(:postal_code, :address, :name, :payment_method, :total_payment)
+    params.require(:order).permit(:postal_code, :address, :name, :payment_method, :total_price)
   end
 
   def customer_params
     params.require(:order_detail).permit(:taxed_price, :quantity, :status, :order_id, :item_id)
+  end
+
+  def billing(order)
+    total_price(@cart_items = current_customer.cart_items) + postage
+  end
+
+  def subtotal
+    (item.non_taxed_price * 1.1) *quantity
   end
 
 end

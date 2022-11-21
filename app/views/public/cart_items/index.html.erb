@@ -1,7 +1,10 @@
-<h3>ショッピングカート</h3>
-<div id="no_cart">
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class="col-12">
+  <h3>ショッピングカート</h3>
+
   <% if @cart_items.present? %>
-    
+    <%= link_to "カートを空にする", cart_items_path, method: :delete, data: {confirm: 'カートを空にしてよろしいですか？'}, class: "btn btn-danger mb-2" %>
     <table class="table table-hover table-bordered">
     <tr>
       <th>商品名</th>
@@ -11,19 +14,20 @@
       <th></th>
     </tr>
     <% @cart_items.each do |i| %>
+    <% @total_price = (@total_price+ i.subtotal) %>
       <tr id="cart-<%= i.id %>">
         <th>
-          <%#= attachment_image_tag i.item, :image, size: "55x43", fallback: "no_image.jpg" %>
+          <%= image_tag i.item.get_image, size: "220x120" %>
           <%= i.item.name %>
         </th>
-        <th><%= i.item.tax_in_price.to_s(:delimited, delimiter: ',') %></th>
+        <th><%= (i.item.non_taxed_price * 1.1).floor.to_s(:delimited, delimiter: ',') %></th>
         <th>
           <%= form_with model:i, url: cart_item_path(i), method: :patch  do |f| %>
-          <%= f.number_field :count, size: 10, min: 1 %>
+          <%= f.number_field :quantity, size: 10, min: 1 %>
           <%= f.submit "変更", class: "btn btn-success" %>
           <% end %>
         </th>
-        <th><%= subtotal(i).to_s(:delimited, delimiter: ',') %></th>
+        <th><%= i.subtotal.floor.to_s(:delimited, delimiter: ',') %></th>
         <th>
           <%= link_to " 削除する", cart_item_path(i), method: :delete, data: {confirm: "#{i.item.name}を削除してよろしいですか？"}, class: "btn btn-danger" %>
         </th>
@@ -31,13 +35,13 @@
     <% end %>
     </table>
 
-    <%= link_to " 買い物を続ける", root_path, class: "btn btn-info" %>
+    <%= link_to " 買い物を続ける", root_path, class: "btn btn-info mb-3" %>
 
     <table class="table table-bordered text-right">
     <tr>
       <td>合計金額</td>
       <td id='total_price'>
-        ¥<%= total_price(@cart_items).to_s(:delimited, delimiter: ',') %>
+        ¥<%= @total_price.floor.to_s(:delimited, delimiter: ',') %>
       </td>
     </tr>
     </table>
@@ -45,4 +49,6 @@
   <% else %>
     no cart
   <% end %>
+    </div>
+</div>
 </div>

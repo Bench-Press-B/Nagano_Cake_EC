@@ -11,9 +11,10 @@
           <p><%= @item.explanation %></p>
           <p>¥<%= (@item.non_taxed_price * 1.1).floor.to_s(:delimited) %>(税込)</p>
           <div class="flex-row">
-            <%= form_with model:@cart_items, url:cart_item_path()
+            <%= form_with model:@cart_items, url:cart_item_path() %>
           </div>
         </div>
+        
       </div>
       </div>
     </div>
