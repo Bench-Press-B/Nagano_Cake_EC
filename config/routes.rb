@@ -39,7 +39,7 @@ Rails.application.routes.draw do
         end
       end
     resources :items, only:[:index,:show]
-    resources :cart_items, only:[:index,:update,:dastroy,:create]
+    resources :cart_items, only:[:index,:update,:destroy,:create]
     delete "cart_items/all_destroy" => "public/cart_items#all_destroy", as: "all_destroy_cart_items"
 
     resources :shipping_addresses, only:[:index,:edit,:create,:update,:destroy]
