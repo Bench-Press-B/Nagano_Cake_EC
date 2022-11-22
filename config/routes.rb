@@ -20,8 +20,6 @@ Rails.application.routes.draw do
   #admin
   namespace :admin do
     resources :customers, only:[:show,:edit,:update, :index]
-    get "customers/unsubscribe" =>"customers#unsubscribe", as: "unsubscribe"
-    patch "customers/withdraw" => "customers#withdraw", as: "withdraw"
     resources :orders, only:[:index,:show,:update]
     resources :items, only:[:index,:new,:create,:show,:edit,:update]
     resources :genres, only:[:index,:create,:edit,:update]
@@ -31,7 +29,9 @@ Rails.application.routes.draw do
 
   #public
   scope module: :public do
-    resources :customers, only:[:index,:show,:edit,:update]
+    resources :customers, only:[:show,:edit,:update]
+    get "customers/unsubscribe" =>"customers#unsubscribe", as: "unsubscribe"
+    patch "customers/withdraw" => "customers#withdraw", as: "withdraw"
     resources :orders, only:[:new,:index,:show,:create] do
       collection do
           post 'confirm'
