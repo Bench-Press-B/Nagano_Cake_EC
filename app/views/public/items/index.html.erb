@@ -29,7 +29,9 @@
             <div>¥<%= (item.non_taxed_price * 1.1).floor.to_s(:delimited) %></div>
           </div>
         <% end %>
-        <%= paginate @items %>
+        <div class="mx-auto mb-3">
+          <%= paginate @items %>
+        </div>
       </div>
     </div>
   </div>

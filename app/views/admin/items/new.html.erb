@@ -6,31 +6,26 @@
   	    <table class="table table-borderless">
   	      <tr>
   	        <th><%= f.label :"商品画像" %></th>
-  	        <td><%= f.file_field :image, class: "form-control-file", accept: 'image/*' %></td>
-  	      <%# 横並びにならない　間隔の調整ができない　%>
+  	        <td class="pr-0"><%= f.file_field :image, class: "form-control-file", accept: 'image/*' %></td>
   	      </tr>
-
-  	       <tr>
+　　　　　<tr>
   	        <th> <%= f.label :"商品名" %></th>
-  	        <td><%= f.text_field :name, class: "form-control", placeholder:"商品名" %></td>
+  	        <td class="pr-0"><%= f.text_field :name, class: "form-control", placeholder:"商品名" %></td>
   	      </tr>
-
   	      <tr>
   	        <th><%= f.label :"商品説明" %></th>
-  	        <td><%= f.text_area :explanation, class: "form-control", placeholder:"ここに説明文を記述します" %></td>
+  	        <td class="pr-0"><%= f.text_area :explanation, class: "form-control", placeholder:"ここに説明文を記述します", rows:"5" %></td>
   	      </tr>
-
-  	       <tr>
+          <tr>
   	        <th><%= f.label :"ジャンル" %></th>
-  	        <td><%= f.collection_select :genre_id, @genres, :id, :name, {include_blank: "--選択してください--"}, class: "form-control" %></td>
+  	        <td class="pr-0"><%= f.collection_select :genre_id, @genres, :id, :name, {include_blank: "--選択してください--"}, class: "form-control" %></td>
   	      </tr>
-
-  	       <tr>
+          <tr>
   	        <th><%= f.label :"税抜価格" %></th>
-  	        <td class=""><%= f.number_field :non_taxed_price, class: "form-control", placeholder:"1000" %>円</td>
+  	        <td class="pr-0"><%= f.number_field :non_taxed_price, class: "form-control", placeholder:"1000" %></td>
+  	        <td class="p-0 pt-3">円</td>
   	      </tr>
-
-  	       <tr>
+          <tr>
   	        <th><%= f.label :"販売ステータス" %></th>
   	        <td class="form-inline">
   	          <div class="form-inline mr-5">
@@ -45,7 +40,7 @@
   	      </tr>
   	      <tr>
   	        <th></th>
-  	        <td class="text-center"><%= f.submit  "  新規登録  ", class: "btn btn-success" %></td>
+  	        <td class="text-center"><%= f.submit  "新規登録", class: "btn btn-success px-4" %></td>
   	      </tr>
   	    </table>
   	  <% end %>

@@ -23,12 +23,18 @@
     <div class="col-md-5">
       <h3 class="mt-2"><strong><%= @item.name %></strong></h3>
       <p class="mb-5"><%= @item.explanation %></p>
-      <p class="pt-5"><strong>¥<%= (@item.non_taxed_price * 1.1).floor.to_s(:delimited) %>(税込)</strong></p>
+
+      <div class="form-inline pt-5 mb-3">
+        <h5 class="mb-1">
+          ¥<%= (@item.non_taxed_price * 1.1).floor.to_s(:delimited) %>
+        </h5>
+        <p class="small mb-0">（税込）</p>
+      </div>
       <%= form_with model:@cart_item, url: cart_items_path, method: :post do |f| %>
         <%= f.hidden_field :item_id, value: @item.id %>
         <%= f.select :quantity, options_for_select((1..10).to_a), include_blank: "個数選択" %>
         <%# select-box?の種類が違う　%>
-        <%= f.submit "カートに入れる", class: 'btn btn-success' %>
+        <%= f.submit "カートに入れる", class: 'btn btn-success ml-5' %>
       <% end %>
 
     </div>
