@@ -14,20 +14,19 @@
       <th></th>
     </tr>
     <% @cart_items.each do |i| %>
-    <% @total_price = (@total_price+ i.subtotal) %>
       <tr id="cart-<%= i.id %>">
         <th>
           <%= image_tag i.item.get_image, size: "220x120" %>
           <%= i.item.name %>
         </th>
-        <th><%= (i.item.non_taxed_price * 1.1).floor.to_s(:delimited, delimiter: ',') %></th>
+        <th><%= tax_price(i.item.non_taxed_price).to_s(:delimited) %></th>
         <th>
           <%= form_with model:i, url: cart_item_path(i), method: :patch  do |f| %>
           <%= f.number_field :quantity, size: 10, min: 1 %>
           <%= f.submit "変更", class: "btn btn-success" %>
           <% end %>
         </th>
-        <th><%= i.subtotal.floor.to_s(:delimited, delimiter: ',') %></th>
+        <th><%= subtotal(i).to_s(:delimited, delimiter: ',') %></th>
         <th>
           <%= link_to " 削除する", cart_item_path(i), method: :delete, data: {confirm: "#{i.item.name}を削除してよろしいですか？"}, class: "btn btn-danger" %>
         </th>
@@ -41,7 +40,7 @@
     <tr>
       <td>合計金額</td>
       <td id='total_price'>
-        ¥<%= @total_price.floor.to_s(:delimited, delimiter: ',') %>
+        ¥<%= total_price(@cart_items).to_s(:delimited) %>
       </td>
     </tr>
     </table>

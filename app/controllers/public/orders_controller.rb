@@ -2,21 +2,16 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @addresses = current_customer.shipping_addresses
   end
 
   def index
     @orders = current_customer.orders.all
-    @order_detail = Order_detail.where(customer:current_customer)
   end
 
   def show
     @order = Order.find(params[:id])
     @order_details = @order.order_details
-  end
-
-  def create
-    @order = current_customer.orders.new(order_params)
-    @order.save
   end
 
   def thanx
@@ -31,7 +26,7 @@ class Public::OrdersController < ApplicationController
 
     # total_priceに請求額を入れる
     @order.total_price = billing(@order)
-    
+
     # addressesに1が入っていれば（自宅）
     if params[:order][:addresses] == "1"
       @order.postal_code = current_customer.postal_code
@@ -40,7 +35,7 @@ class Public::OrdersController < ApplicationController
 
     # addressesに2が入っていれば（配送先一覧）
     elsif params[:order][:addresses] == "2"
-      ship = Address.find(params[:order][:address_id])
+      ship = ShippingAddress.find(params[:order][:address_id])
       @order.postal_code = ship.postal_code
       @order.address = ship.address
       @order.name = ship.name
@@ -60,6 +55,28 @@ class Public::OrdersController < ApplicationController
     end
   end
 
+  def create
+    @order = current_customer.orders.new(order_params)
+    @order.save
+
+    if params[:order][:ship] =="1"
+      current_customer.address.create(address_params)
+    end
+
+    @cart_items = current_customer.cart_items
+    @cart_items.each do |cart_item|
+      @order_detail = OrderDetail.new
+      @order_detail.item_id = cart_item.item_id
+      @order_detail.order_id = @order.id
+      @order_detail.quantity = cart_item.quantity
+      @order_detail.taxed_price = (cart_item.item.non_taxed_price * 1.1) * cart_item.quantity
+      @order_detail.save
+      end
+    @cart_items.destroy_all
+
+    redirect_to thanx_orders_path
+  end
+
   private
 
   def order_params
@@ -68,14 +85,6 @@ class Public::OrdersController < ApplicationController
 
   def customer_params
     params.require(:order_detail).permit(:taxed_price, :quantity, :status, :order_id, :item_id)
-  end
-
-  def billing(order)
-    total_price(@cart_items = current_customer.cart_items) + postage
-  end
-
-  def subtotal
-    (item.non_taxed_price * 1.1) *quantity
   end
 
 end

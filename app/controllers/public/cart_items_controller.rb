@@ -2,22 +2,20 @@ class Public::CartItemsController < ApplicationController
 
   def index
     @cart_items = current_customer.cart_items
-    @total_price = 0
   end
 
   def create
     @cart_item = CartItem.new(cart_items_params)
     @cart_item.customer_id = current_customer.id
-    @cart_item.quantity = 5
     @old_cart_item = CartItem.find_by(item: @cart_item.item)
     if @old_cart_item.present? and @cart_item.valid?
-      @cart_item.quantity += @old_cart_item.count
+      @cart_item.quantity += @old_cart_item.quantity
       @old_cart_item.destroy
     end
     if @cart_item.save
       redirect_to cart_items_path
     else
-      render ("items/show")
+      render ("public/items/show")
     end
   end
 
@@ -42,6 +40,6 @@ class Public::CartItemsController < ApplicationController
 
   private
   def cart_items_params
-    params.require(:cart_item).permit(:customer_id, :item_id, :count)
+    params.require(:cart_item).permit(:customer_id, :item_id, :quantity)
   end
 end
