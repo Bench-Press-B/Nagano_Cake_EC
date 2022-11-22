@@ -5,37 +5,39 @@
        <table class ="table table-bordered">
         <tr>
           <td>注文日</td>
-          <td></td>
+          <td><%= @order.created_at.strftime('%Y/%m/%d')  %></td>
         </tr>
         <tr>
           <td>配送先</td>
-          <td></td>
+          <td>〒<%= @order.postal_code %><br>
+            <%= @order.address %><br>
+            <%= @order.name %></td>
         </tr>
         <tr>
           <td>支払方法</td>
-          <td></td>
+          <td><%= @order.payment_method %></td>
         </tr>
         <tr>
           <td>ステータス</td>
-          <td></td>
+          <td><%= @order.status %></td>
         </tr>
        </table>
     </div>
-    
+
     <div class ="col-md-3">
      <strong>請求情報</strong>
       <table class ="table table-bordered">
         <tr>
           <td>商品合計</td>
-          <td></td>
+          <td><%= total_price(@order_details).to_s(:delimited) %></td>
         </tr>
         <tr>
           <td>配送料</td>
-          <td></td>
+          <td><%= @order.postage %></td>
         </tr>
         <tr>
           <td>ご請求額</td>
-          <td></td>
+          <td><%= @order.total_price.to_s(:delimited) %></td>
         </tr>
       </table>
     </div>
@@ -49,7 +51,14 @@
         </tr>
       </thead>
       <tbody>
-        <td></td>
+        <% @order.order_details.each do |order| %>
+        <tr>
+          <td><%= order.item.name %></td>
+          <td><%= (order.item.non_taxed_price * 1.1).floor.to_s(:delimited) %></td>
+          <td><%= order.quantity %></td>
+          <td><%= ((order.item.non_taxed_price * 1.1).floor * order.quantity).to_s(:delimited) %></td>
+        </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
