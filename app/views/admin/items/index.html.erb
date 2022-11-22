@@ -1,16 +1,18 @@
 <div class='container'>
   <div class='row'>
-    <div class="col-sm-12 px-5 px-sm-0">
+    <div class="col-md-12 px-5 px-sm-0">
       <div class="form-inline">
-        <h2>商品一覧</h2>
-        <%= link_to new_admin_item_path do %>
-          <i class="fa-thin fa-circle-plus"></i>
-          <%#　①アイコンが表示されない　②右寄せできない　%>
-        <% end %>
+        <h2 class="col-2 bg-light text-center mb-5">商品一覧</h2>
+        <div class="offset-md-9 col-1">
+          <%= link_to new_admin_item_path, class:"text-reset" do %>
+            <i class="fa-solid fa-circle-plus fa-2x"></i>
+            <%#　①アイコンが違う　②影がつけられない %>
+          <% end %>
+        </div>
 
       </div>
-      <table class='table table-hover'>
-        <thead>
+      <table class='table table-borderless'>
+        <thead class="bg-light">
           <tr>
             <th>商品ID</th>
             <th>商品名</th>
@@ -23,8 +25,8 @@
           <% @items.each do |item| %>
             <tr>
               <td><%= item.id %></td>
-              <td>
-                <%= link_to admin_item_path(item) do %>
+              <td class="text-decoration-underline">
+                <%= link_to admin_item_path(item), class:"text-reset border-bottom border-dark" do %>
                   <%= item.name %>
                 <% end %>
               </td>
@@ -34,16 +36,19 @@
               </td>
               <td>
                 <% if item.is_active? %>
-                  <%= link_to '販売中', admin_item_path(item, item: {is_active: false}), method: :patch %>
+                  <%= link_to '販売中', admin_item_path(item, item: {is_active: false}), method: :patch, class:"text-success" %>
                 <% else %>
-                  <%= link_to '販売停止中', admin_item_path(item, item: {is_active: true}), method: :patch %>
+                  <%= link_to '販売停止中', admin_item_path(item, item: {is_active: true}), method: :patch, class:"text-secondary" %>
                 <% end %>
               </td>
             </tr>
           <% end %>
-          <%= paginate @items %>
         </tbody>
       </table>
+    </div>
+    <div class="mx-auto">
+  	  <%= paginate @items %>
+  	</div>
   </div>
 </div>
 
