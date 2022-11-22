@@ -14,12 +14,17 @@
       <tbody>
         <% @orders.each do |order| %>
         <tr>
-          <td><%= order.created_at %></td>
-          <td><%= order.address %></td>
-          <td><!-- itemの商品名 --></td>
+          <td><%= order.created_at.strftime('%Y/%m/%d')  %></td>
+          <td>
+            〒<%= order.postal_code %><br>
+            <%= order.address %><br>
+            <%= order.name %>
+          </td>
+          <!-- 注文商品の修正が必要です -->
+          <td><%= @item.name %></td>
           <td><%= order.total_price %></td>
           <td><%= order.status %></td>
-<td><%= link_to "表示する",about_path,class: "btn btn-primary" %> </td>
+          <td><%= link_to "表示する",about_path,class: "btn btn-primary" %></td>
         </tr>
         <% end %>
       </tbody>

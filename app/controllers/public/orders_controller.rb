@@ -7,6 +7,8 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.orders.all
+    @order_detail = OrderDetail.where(customer:current_customer)
+    @item = Item.where(customer:current_customer)
   end
 
   def show
@@ -85,6 +87,10 @@ class Public::OrdersController < ApplicationController
 
   def customer_params
     params.require(:order_detail).permit(:taxed_price, :quantity, :status, :order_id, :item_id)
+  end
+  
+  def item_params
+    params.require(:item).permit(:name)
   end
 
 end

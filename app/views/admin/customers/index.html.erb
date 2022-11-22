@@ -11,6 +11,7 @@
     </thead>
     <tbody>
       <% @customer.each do |customer| %>
+
         <tr>
           <td><%= customer.id %></td>
           <td><%= link_to "#{customer.full_name}",admin_customer_path(customer.id) %></td>
