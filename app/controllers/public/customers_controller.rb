@@ -16,13 +16,12 @@ class Public::CustomersController < ApplicationController
       render "edit"
     end
   end
-  
+
   def unsubscribe
-    @customer = Customer.find(params[:id])
   end
-  
+
   def withdraw
-    @customer = Customer.find(params[:id])
+    @customer = Customer.find(current_customer.id)
     @customer.update(is_deleted: true)
     reset_session
     redirect_to root_path
@@ -40,10 +39,10 @@ class Public::CustomersController < ApplicationController
      redirect_to customer_path(current_user)
    end
   end
-  
+
   def reject_user
     @customer = Customer.find_by(name: params[:customer][:first_name][:last_name])
-    if @customer 
+    if @customer
       if @customer.valid_password?(params[:customer][:encrypted_password]) && (@customer.is_deleted == false)
         redirect_to new_customer_registration
       end

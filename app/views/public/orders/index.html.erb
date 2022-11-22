@@ -21,10 +21,13 @@
             <%= order.name %>
           </td>
           <!-- 注文商品の修正が必要です -->
-          <td><%= @item.name %></td>
+          <td><% order.order_details.each do |name| %>
+            <%= name.item.name %> <br>
+            <% end %>
+          </td>
           <td><%= order.total_price %></td>
           <td><%= order.status %></td>
-          <td><%= link_to "表示する",about_path,class: "btn btn-primary" %></td>
+          <td><%= link_to "表示する",order_path(order),class: "btn btn-primary" %></td>
         </tr>
         <% end %>
       </tbody>
