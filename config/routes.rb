@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 
   #admin
   namespace :admin do
-
     resources :customers, only:[:index,:show,:edit,:update]
     resources :orders, only:[:index,:show,:update]
     resources :items, only:[:index,:new,:create,:show,:edit,:update]
@@ -40,8 +39,11 @@ Rails.application.routes.draw do
      end
    end
     resources :items, only:[:index,:show]
-    resources :cart_items, only:[:index,:update,:destroy,:create]
-    delete "cart_items/all_destroy" => "public/cart_items#all_destroy", as: "all_destroy_cart_items"
+    resources :cart_items, only:[:index,:update,:destroy,:create] do
+      collection do
+          delete '/' => 'cart_items#all_destroy'
+        end
+      end
     resources :shipping_addresses, only:[:index,:edit,:create,:update,:destroy]
 
   end

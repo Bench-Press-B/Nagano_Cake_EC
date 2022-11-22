@@ -26,10 +26,11 @@
             <%= "#{current_customer.full_name}"%>
           </div>
 
-          <% if @shipping_addresses != [] %>  <!--もし配送先がない場合-->
+          <% if @shipping_addresses != [] %>
           <div class="radio">
             <%= f.radio_button :addresses, "2" %>  <!--登録してあるshipping_addressesから引っ張ってくる-->
               <span>登録済住所から選択</span><br>
+            <%= f.collection_select  :address_id, @addresses, :id, :order_address, include_blank: "選択してください" %>
           </div>
           <% end %>
 

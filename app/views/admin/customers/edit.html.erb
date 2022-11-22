@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
    <h2>会員情報編集</h2>
-    <%= form_with model: @customer, method: :patch do |f| %>
+    <%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
     <table>
      <tr>
        <td>氏名</td>
@@ -31,13 +31,18 @@
      </tr>
      <tr>
        <td>会員ステータス</td>
-       <td></td>
+       <td class="form-inline">
+          　<%= f.radio_button :is_deleted, false %>
+          　<%= f.label :is_deleted, "有効" %>
+          　<%= f.radio_button :is_deleted, true %>
+          　<%= f.label :is_deleted, "退会" %>
+       </td>
      </tr>
      <tr>
       <td></td>
       <td><%= f.submit"変更を保存", class: 'btn btn-success' %></td>
      </tr>
-     
+
     </table>
     <% end %>
   </div>

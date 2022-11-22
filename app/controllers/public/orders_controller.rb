@@ -2,6 +2,7 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @addresses = current_customer.shipping_addresses
   end
 
   def index
@@ -36,7 +37,7 @@ class Public::OrdersController < ApplicationController
 
     # addressesに2が入っていれば（配送先一覧）
     elsif params[:order][:addresses] == "2"
-      ship = Address.find(params[:order][:address_id])
+      ship = ShippingAddress.find(params[:order][:address_id])
       @order.postal_code = ship.postal_code
       @order.address = ship.address
       @order.name = ship.name

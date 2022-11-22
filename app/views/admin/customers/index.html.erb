@@ -11,14 +11,24 @@
     </thead>
     <tbody>
       <% @customer.each do |customer| %>
-       <tr>
-         <td><%= customer.id %></td>
-         <td><%= customer.full_name %></td>
-         <td><%= customer.email %></td>
-         <td></td>
-       </tr>
-       <% end %>
+
+        <tr>
+          <td><%= customer.id %></td>
+          <td><%= link_to "#{customer.full_name}",admin_customer_path(customer.id) %></td>
+          <td><%= customer.email %></td>
+          <td>
+            <% if customer.active_for_authentication? %>
+              <p class="text-success font-weight-bold">有効</p>
+            <% else %>
+              <p class="text-secondary font-weight-bold">退会</p>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
      </tbody>
    </table>
   </div>
 </div>
+
+
+
