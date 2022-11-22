@@ -15,6 +15,11 @@ class Admin::OrdersController < ApplicationController
     flash[:notice] = "注文ステータスの変更をしました"
     redirect_to admin_order_path(@order)
 
+    if @order.status == "入金確認"
+      @order.order_details.each do |order_detail|
+        order_detail.update(status: 1)
+      end
+    end
   end
 
   def order_params
