@@ -15,7 +15,7 @@ class Public::CartItemsController < ApplicationController
     if @cart_item.save
       redirect_to cart_items_path
     else
-      render ("public/items/show")
+      redirect_to request.referer
     end
   end
 
