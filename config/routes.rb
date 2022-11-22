@@ -23,8 +23,8 @@ Rails.application.routes.draw do
     resources :orders, only:[:index,:show,:update] do
       member do
         get :current_index
-        resource :order_details,only: [:update]
-      end
+      resource :order_details,only: [:update]
+    end
     end
     resources :items, only:[:index,:new,:create,:show,:edit,:update]
     resources :genres, only:[:index,:create,:edit,:update]
