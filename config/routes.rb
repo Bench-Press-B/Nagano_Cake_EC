@@ -33,8 +33,6 @@ Rails.application.routes.draw do
     resources :customers, only:[:show,:edit,:update]
     get "customers/unsubscribe" =>"customers#unsubscribe", as: "unsubscribe"
     patch "customers/withdraw" => "customers#withdraw", as: "withdraw"
-    get "customers/:id/unsubscribe" => "customers#unsubscribe", as: "unsubscribe"
-    patch "customers/:id/withdraw" => "customers#withdraw", as: "withdraw"
     resources :orders, only:[:new,:index,:show,:create] do
      collection do
        post 'confirm'
