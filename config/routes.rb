@@ -19,12 +19,17 @@ Rails.application.routes.draw do
 
   #admin
   namespace :admin do
-    resources :customers, only:[:index,:show,:edit,:update]
-    resources :orders, only:[:index,:show,:update]
+    resources :customers, only:[:show,:edit,:update, :index]
+    resources :orders, only:[:index,:show,:update] do
+      member do
+        get :current_index
+        resource :order_details,only: [:update]
+      end
+    end
     resources :items, only:[:index,:new,:create,:show,:edit,:update]
     resources :genres, only:[:index,:create,:edit,:update]
     resources :orders, only:[:show,:update]
-    resources :orders_details, only:[:update]
+
   end
 
   #public
