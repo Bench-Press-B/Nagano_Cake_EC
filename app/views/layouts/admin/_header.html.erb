@@ -39,7 +39,11 @@
         <% end %>
         </ul>
         <ul class="navbar-nav ml-auto">
-           <%= render 'admin/searches/form', path: admin_search_path %>
+          <% if admin_signed_in? %>
+            <%= render 'admin/searches/form', path: admin_search_path %>
+          <% else %>
+            <%= render 'public/searches/form', path: search_path %>
+          <% end %>
         </ul>
       </div>
     </div>
