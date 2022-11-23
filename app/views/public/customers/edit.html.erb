@@ -1,33 +1,34 @@
 <div class="container">
-  <div class="row">
    <h2>会員情報編集</h2>
-    <%= form_with model: @customer, method: :patch do |f| %>
-    <table>
+   <div class="row">
+    <div class="offset-md-2 col-md-6 px-5 px-sm-0 mt-3 text-nowrap">
+    <%= form_with model: @customer,url:customer_path(@customer), method: :patch , local:true do |f| %>
+    <table class="table table-borderless">
      <tr>
-       <td>氏名</td>
-       <td><%= f.text_field :first_name, class: "form-control" %></td>
-       <td><%= f.text_field :last_name, class: "form-control" %></td>
+       <th><%= f.label :"氏名" %></th>
+       <td><%= f.text_field :first_name, required: true, class: "form-control" %></td>
+       <td><%= f.text_field :last_name, required: true, class: "form-control" %></td>
      </tr>
      <tr>
-       <td>フリガナ</td>
-       <td><%= f.text_field :kana_first_name, class: "form-control" %></td>
-       <td><%= f.text_field :kana_last_name, class: "form-control" %></td>
+       <th><%= f.label :"フリガナ" %></th>
+       <td><%= f.text_field :kana_first_name, required: true, class: "form-control" %></td>
+       <td><%= f.text_field :kana_last_name, required: true, class: "form-control" %></td>
      </tr>
      <tr>
-       <td>郵便番号</td>
-       <td><%= f.text_field :postal_code, class: "form-control" %></td>
+       <th><%= f.label :"郵便番号" %></th>
+       <td><%= f.text_field :postal_code, required: true, class: "form-control" %></td>
      </tr>
      <tr>
-       <td>住所</td>
-       <td><%= f.text_field :address, class: "form-control" %></td>
+       <th><%= f.label :"住所" %></th>
+       <td><%= f.text_field :address, required: true, class: "form-control" %></td>
      </tr>
      <tr>
-       <td>電話番号</td>
-       <td><%= f.text_field :phone_number, class: "form-control" %></td>
+       <th><%= f.label :"電話番号" %></th>
+       <td><%= f.text_field :phone_number, required: true, class: "form-control" %></td>
      </tr>
      <tr>
-       <td>メールアドレス</td>
-       <td><%= f.text_field :email, class: "form-control" %></td>
+       <th><%= f.label :"メールアドレス" %></th>
+       <td><%= f.text_field :email, required: true, class: "form-control" %></td>
      </tr>
      <tr>
       <td></td>
@@ -36,6 +37,6 @@
       <td><%= link_to "退会する", unsubscribe_customers_path, class: "btn btn-danger" %></td>
      </tr>
     </table>
-
+   </div>
   </div>
 </div>
