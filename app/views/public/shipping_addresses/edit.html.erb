@@ -1,21 +1,22 @@
 <div class="container">
+  <h2>配送先編集</h2>
   <div class="row">
-   <h2>配送先編集</h2>
     <%= form_with model: @address, method: :patch do |f| %>
-    <table>
+    <table class="table table-borderless">
      <tr>
-       <td>郵便番号(ハイフンなし)</td>
-       <td><%= f.text_field :postal_code, class: "form-control",:size=>"30" %></td>
+       <th><%= f.label :"郵便番号(ハイフンなし)" %></th>
+       <td><%= f.text_field :postal_code,required: true, class: "form-control" %></td>
      </tr>
      <tr>
-       <td>住所</td>
-       <td><%= f.text_field :address, class: "form-control",:size=>"50" %></td>
+       <th><%= f.label :"商品" %></th>
+       <td><%= f.text_field :address, required: true, class: "form-control" %></td>
      </tr>
      <tr>
-       <td>宛名</td>
-       <td><%= f.text_field :name, class: "form-control" %></td>
-       <td><%= f.submit"変更内容を保存", class: 'btn btn-success',:size=>"30" %></td>
+       <th><%= f.label :"宛名" %></th>
+       <td><%= f.text_field :name, required: true, class: "form-control" %></td>
+       <td><%= f.submit"変更内容を保存", class: 'btn btn-success ml-5' %></td>
      </tr>
     <% end %>
+    </table>
   </div>
 </div>

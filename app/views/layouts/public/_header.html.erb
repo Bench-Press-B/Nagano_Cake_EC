@@ -1,4 +1,5 @@
 <header>
+<<<<<<< HEAD
   <nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
     <div class="container">
       <a class="navbar-brand text-light font-weight-bold" href="/"><span>ながのCAKE</span></a>
@@ -8,6 +9,15 @@
       
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <p class="text-light mx-auto mt-3 pl-5">ようこそ、<%= current_customer.first_name %>さん！</p>
+=======
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light" href="/"><span>ながのCAKE</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse flex-column" id="navbarNavDropdown">
+>>>>>>> origin/develop
         <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
           <li>
@@ -37,8 +47,10 @@
           </li>
         <% end %>
         </ul>
+        <ul class="navbar-nav ml-auto">
+          <%= render 'public/searches/form', path: admin_search_path %>
+        </ul>
       </div>
     </div>
   </nav>
-
 </header>
