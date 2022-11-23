@@ -5,29 +5,29 @@
     <table>
      <tr>
        <td>氏名</td>
-       <td><%= f.text_field :first_name, class: "form-control" %></td>
-       <td><%= f.text_field :last_name, class: "form-control" %></td>
+       <td><%= f.text_field :first_name, required: true, class: "form-control" %></td>
+       <td><%= f.text_field :last_name, required: true,class: "form-control" %></td>
      </tr>
      <tr>
        <td>フリガナ</td>
-       <td><%= f.text_field :kana_first_name, class: "form-control" %></td>
-       <td><%= f.text_field :kana_last_name, class: "form-control" %></td>
+       <td><%= f.text_field :kana_first_name,required: true, class: "form-control" %></td>
+       <td><%= f.text_field :kana_last_name,required: true, class: "form-control" %></td>
      </tr>
      <tr>
        <td>郵便番号</td>
-       <td><%= f.text_field :postal_code, class: "form-control" %></td>
+       <td><%= f.text_field :postal_code,required: true, class: "form-control" %></td>
      </tr>
      <tr>
        <td>住所</td>
-       <td><%= f.text_field :address, class: "form-control" %></td>
+       <td><%= f.text_field :address,required: true, class: "form-control" %></td>
      </tr>
      <tr>
        <td>電話番号</td>
-       <td><%= f.text_field :phone_number, class: "form-control" %></td>
+       <td><%= f.text_field :phone_number,required: true, class: "form-control" %></td>
      </tr>
      <tr>
        <td>メールアドレス</td>
-       <td><%= f.text_field :email, class: "form-control" %></td>
+       <td><%= f.text_field :email,required: true, class: "form-control" %></td>
      </tr>
      <tr>
        <td>会員ステータス</td>
