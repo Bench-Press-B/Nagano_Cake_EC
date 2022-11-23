@@ -1,7 +1,10 @@
 <div class="container">
   <div class="row">
-    <div class='mx-auto'>
+    <div class="col-md-3">
+      <%= render 'admin/genres/genre_search', genres: @genres %>
+    </div>
 
+    <div class='mx-auto'>
       <div class="card">
         <%= image_tag 'cake1.jpg', size: '400x350', class: 'card-img' %>
         <div class="card-img-overlay font-weight-bold mt-5">
@@ -13,7 +16,6 @@
           </h4>
         </div>
       </div>
-<div>
       <h1 class="font-weight-bold mt-3">新着商品</h1>
 
     <div class="d-flex flex-row flex-wrap">
@@ -30,7 +32,6 @@
         </div>
       </div>
       <% end %>
-
     </div>
 
       <div class="text-right">
