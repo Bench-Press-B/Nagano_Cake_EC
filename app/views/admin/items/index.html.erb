@@ -1,24 +1,22 @@
 <div class='container'>
   <div class='row'>
     <div class="col-md-12 px-5 px-sm-0">
-      <div class="form-inline">
-        <h2 class="col-2 bg-light text-center mb-5">商品一覧</h2>
+      <div class="form-inline mt-2 mb-3">
+        <h2 class="col-2 bg-light text-center">商品一覧</h2>
         <div class="offset-md-9 col-1">
           <%= link_to new_admin_item_path, class:"text-reset" do %>
             <i class="fa-solid fa-plus fa-2x rounded-circle shadow"></i>
-            <%#　①アイコンが違う　②影がつけられない %>
           <% end %>
         </div>
-
       </div>
-      <table class='table table-borderless'>
+      <table class='table table-borderless border-bottom'>
         <thead class="bg-light">
           <tr>
-            <th>商品ID</th>
-            <th>商品名</th>
-            <th>税抜価格</th>
-            <th>ジャンル</th>
-            <th>ステータス</th>
+            <th class="col-sm-1">商品ID</th>
+            <th class="col-sm-4">商品名</th>
+            <th class="col-sm-1">税抜価格</th>
+            <th class="col-sm-4">ジャンル</th>
+            <th class="col-sm-2">ステータス</th>
           </tr>
         </thead>
         <tbody>
@@ -34,13 +32,11 @@
               <td>
                   <%= item.genre.name %>
               </td>
-              <td>
-                <% if item.is_active? %>
-                  <%= link_to '販売中', admin_item_path(item, item: {is_active: false}), method: :patch, class:"text-success" %>
-                <% else %>
-                  <%= link_to '販売停止中', admin_item_path(item, item: {is_active: true}), method: :patch, class:"text-secondary" %>
-                <% end %>
-              </td>
+              <% if item.is_active? %>
+                <td class="text-success">販売中</td>
+              <% else %>
+                <td class="text-secondary">販売停止中</td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
