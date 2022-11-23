@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'searches/search'
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
     resources :items, only:[:index,:new,:create,:show,:edit,:update]
     resources :genres, only:[:index,:create,:edit,:update]
     resources :orders, only:[:show,:update]
+    get '/search' => 'searches#search'
 
   end
 
@@ -46,13 +48,18 @@ Rails.application.routes.draw do
        get 'thanx'
      end
    end
-    resources :items, only:[:index,:show]
+    resources :items, only:[:index,:show] do
+      collection do
+        get 'genre/:id'=> 'items#genre', as:'genre'
+      end
+    end
     resources :cart_items, only:[:index,:update,:destroy,:create] do
       collection do
           delete '/' => 'cart_items#all_destroy'
         end
       end
     resources :shipping_addresses, only:[:index,:edit,:create,:update,:destroy]
+    get '/search' => 'searches#search'
 
   end
 

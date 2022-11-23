@@ -1,11 +1,11 @@
 <div class='container px-5 px-sm-0'>
   <div class='row'>
     <div class='col-md-3'>
-     <%= render 'search', genres: @genres %>
+      <%= render 'search', genres: @genres %>
     </div>
     <div class='col-md-9'>
       <div class="d-flex align-items-end mb-3">
-        <h2>商品一覧</h2>
+        <h2>ジャンル一覧</h2>
         <h5>（全<%= @item.count %>件）</h5>
       </div>
       <%= render 'index', items: @items %>
