@@ -18,6 +18,9 @@
 
 
 ## 機能
+1. device
+2. kaminari
+3. enum_helpr
 
 ## バージョン
 Rails 6.1.7  ruby 3.1.2
