@@ -1,7 +1,7 @@
 <div class='container px-5 px-sm-0'>
   <div class='row'>
     <div class="col-12">
-  <h3>ショッピングカート</h3>
+  <h3><i class="fa-solid fa-cart-shopping"></i>ショッピングカート</h3>
 
   <% if @cart_items.present? %>
     <%= link_to "カートを空にする", cart_items_path, method: :delete, data: {confirm: 'カートを空にしてよろしいですか？'}, class: "btn btn-danger mb-2" %>
@@ -15,21 +15,7 @@
     </tr>
     <% @cart_items.each do |i| %>
       <tr id="cart-<%= i.id %>">
-        <th>
-          <%= image_tag i.item.get_image, size: "220x120" %>
-          <%= i.item.name %>
-        </th>
-        <th><%= tax_price(i.item.non_taxed_price).to_s(:delimited) %></th>
-        <th>
-          <%= form_with model:i, url: cart_item_path(i), method: :patch  do |f| %>
-          <%= f.number_field :quantity, size: 10, min: 1 %>
-          <%= f.submit "変更", class: "btn btn-success" %>
-          <% end %>
-        </th>
-        <th><%= subtotal(i).to_s(:delimited, delimiter: ',') %></th>
-        <th>
-          <%= link_to " 削除する", cart_item_path(i), method: :delete, data: {confirm: "#{i.item.name}を削除してよろしいですか？"}, class: "btn btn-danger" %>
-        </th>
+        <%= render "items_form", cart_item: i %>
       </tr>
     <% end %>
     </table>

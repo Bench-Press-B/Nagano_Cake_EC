@@ -1,8 +1,9 @@
 <div class='container px-5 px-sm-0'>
 <div class="row">
   <div class="col-xs-12">
-    <h2 class="head-line title_h2 text-center">注文情報入力</h2>
+    <h2 class="head-line title_h2 mb-3"><i class="fa-solid fa-pen-to-square"></i>注文情報入力</h2>
     <% if current_customer.cart_items.present? %>
+    <%= render 'layouts/errors', obj: @order %>
     <div>
       <%= form_with :model => @order, url: confirm_orders_path, method: :post, local: true  do |f| %>
         <h3 class="font-weight-bold mb-3">支払い方法</h3>
