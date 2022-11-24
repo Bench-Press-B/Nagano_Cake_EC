@@ -31,13 +31,14 @@ class Admin::ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
+    @genres = Genre.all
     if @item.update(item_params)
       redirect_to admin_items_path
     else
-      render 'index'
+      render 'edit'
     end
   end
-  
+
   private
 
   def item_params
