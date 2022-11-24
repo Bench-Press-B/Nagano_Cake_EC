@@ -2,9 +2,8 @@ class CartItem < ApplicationRecord
 
   belongs_to :customer
   belongs_to :item
-  
-  def subtotal
-    (item.non_taxed_price * 1.1) *quantity
-  end
+
+ validates :customer_id, :item_id, :quantity, presence: true
+ validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
 
 end
