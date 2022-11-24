@@ -1,10 +1,10 @@
 <div class="container">
-  <h2>注文情報確認</h2>
+  <h2><i class="fa-regular fa-square-check mb-3"></i>注文情報確認</h2>
   <div class="row">
-    <div class="col-xs-9">
-      <table class="table">
+    <div class="col-xs-10">
+      <table class="table table-bordered ">
         <thead>
-          <tr>
+          <tr class="bg-secondary text-light">
             <th>商品名</th>
             <th>単価（税込）</th>
             <th>数量</th>
@@ -15,7 +15,7 @@
           <% @cart_items.each do |cart| %>
             <tr>
               <td class="text-left">
-                <%= image_tag cart.item.get_image, size: "220x120" %>
+                <%= image_tag cart.item.get_image, size: "110x60" %>
                 <%= cart.item.name %>
               </td>
               <td class="text-right">
@@ -34,17 +34,17 @@
     </div>
 
     <div class="col-xs-3 offset-md-1">
-      <table class="table">
+      <table class="table table-bordered">
           <tr>
-            <th>送料</th>
+            <th class="bg-secondary text-light">送料</th>
             <td class="text-right col-xs-5">¥<%= @order.postage %></td>
           </tr>
           <tr>
-            <th class="info">商品合計</th>
+            <th class="bg-secondary text-light">商品合計</th>
             <td class="text-right">¥<%= total_price(@cart_items).to_s(:delimited) %></td>
           </tr>
           <tr>
-            <th class="info">請求金額</th>
+            <th class="bg-secondary text-light">請求金額</th>
             <td class="text-right">¥<%= billing(@order).to_s(:delimited) %></td>
           </tr>
       </table>
@@ -52,7 +52,7 @@
   </div>
   <div class="row">
     <div class="col-xs-8">
-      <table class="table">
+      <table class="table table-bordered">
         <thead>
         <tr>
           <th  class="info">支払方法</th>

@@ -1,6 +1,7 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
 
+
   def new
     @order = Order.new
     @addresses = current_customer.shipping_addresses
@@ -27,32 +28,26 @@ class Public::OrdersController < ApplicationController
       customer: current_customer,
       payment_method: params[:order][:payment_method])
 
-    # total_priceに請求額を入れる
     @order.total_price = billing(@order)
 
-    # addressesに1が入っていれば（自宅）
     if params[:order][:addresses] == "1"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = current_customer.full_name
-
-    # addressesに2が入っていれば（配送先一覧）
     elsif params[:order][:addresses] == "2"
       ship = ShippingAddress.find(params[:order][:address_id])
       @order.postal_code = ship.postal_code
       @order.address = ship.address
       @order.name = ship.name
 
-    # addressesに3が入っていれば(新配送先)
     elsif params[:order][:addresses] == "3"
       @order.postal_code = params[:order][:postal_code]
       @order.address = params[:order][:address]
       @order.name = params[:order][:name]
-      @ship = "1"
+      @shipping = "1"
 
-    # 有効かどうかの確認
       unless @order.valid? == true
-        @addresses = Address.where(customer: current_customer)
+        @addresses = ShippingAddress.where(customer: current_customer)
         render :new
       end
     end
@@ -61,10 +56,6 @@ class Public::OrdersController < ApplicationController
   def create
     @order = current_customer.orders.new(order_params)
     @order.save
-
-    if params[:order][:ship] =="1"
-      current_customer.address.create(address_params)
-    end
 
     @cart_items = current_customer.cart_items
     @cart_items.each do |cart_item|
@@ -92,6 +83,10 @@ class Public::OrdersController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name)
+  end
+
+  def shipping_address_params
+    params.require(:order).permit(:customer_id, :postal_code, :address, :name)
   end
 
 end
