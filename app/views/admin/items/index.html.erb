@@ -1,14 +1,14 @@
 <div class='container'>
+  <div class="form-inline mt-2 mb-3">
+    <h2 class="col-2 bg-light text-center">商品一覧</h2>
+    <div class="offset-md-9 col-1">
+      <%= link_to new_admin_item_path, class:"text-reset" do %>
+        <i class="fa-solid fa-plus fa-2x rounded-circle shadow"></i>
+      <% end %>
+    </div>
+  </div>
   <div class='row'>
     <div class="col-md-12 px-5 px-sm-0">
-      <div class="form-inline mt-2 mb-3">
-        <h2 class="col-2 bg-light text-center">商品一覧</h2>
-        <div class="offset-md-9 col-1">
-          <%= link_to new_admin_item_path, class:"text-reset" do %>
-            <i class="fa-solid fa-plus fa-2x rounded-circle shadow"></i>
-          <% end %>
-        </div>
-      </div>
       <table class='table table-borderless border-bottom'>
         <thead class="bg-light">
           <tr>
