@@ -1,24 +1,16 @@
 # Nagano_Cake_EC
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 概要
 
-Things you may want to cover:
+## 設計書
 
-* Ruby version
+## 機能
 
-* System dependencies
+## バージョン
+Rails 6.1.7  ruby 3.1.2
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 作者
+・DaikiHiroseJP
+・ren6662
+・iam-yuya
+・dema24
