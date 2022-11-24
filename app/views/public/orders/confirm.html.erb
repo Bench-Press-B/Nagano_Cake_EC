@@ -15,16 +15,16 @@
           <% @cart_items.each do |cart| %>
             <tr>
               <td class="text-left">
-                <%= image_tag cart.item.get_image, size: "60x30" %>
+                <%= image_tag cart.item.get_image, size: "80x60" %>
                 <%= cart.item.name %>
               </td>
-              <td width="150" class="text-left">
+              <td width="150" class="text-left align-middle">
                 ¥<%= tax_price(cart.item.non_taxed_price).to_s(:delimited) %>
               </td>
-              <td width="120" class="text-left">
+              <td width="120" class="text-left align-middle">
                   <%= cart.quantity %>
               </td>
-              <td width="150" class="text-left">
+              <td width="150" class="text-left align-middle">
                 ¥<%= subtotal(cart).to_s(:delimited, delimiter: ',') %>
               </td>
             </tr>
@@ -35,6 +35,7 @@
 
     <div class="col-xs-3 offset-md-1">
       <table class="table table-bordered">
+        <thead>
           <tr>
             <th class="bg-light">送料</th>
             <td width="120" class="text-left col-xs-8">¥<%= @order.postage %></td>
@@ -47,6 +48,7 @@
             <th class="bg-light">請求金額</th>
             <td width="120" class="text-left">¥<%= billing(@order).to_s(:delimited) %></td>
           </tr>
+        </thead>
       </table>
     </div>
   </div>
@@ -55,13 +57,13 @@
       <table class="table table-bordered">
         <thead>
         <tr>
-          <th  class="info">支払方法</th>
+          <th class="info bg-light">支払方法</th>
           <td class="text-left">
             <%= @order.payment_method %>
           </td>
         </tr>
         <tr>
-          <th  class="info">お届け先</th>
+          <th  class="info bg-light">お届け先</th>
           <td class="text-left">
             <%= "〒#{@order.postal_code} #{@order.address} 　#{@order.name}" %>
           </td>
@@ -79,7 +81,7 @@
         <%= f.hidden_field :address%>
         <%= f.hidden_field :name%>
         <%= f.hidden_field :total_price%>
-        <%= f.submit '注文を確定する', class:'btn btn-success'%>
+        <%= f.submit '注文を確定する', class:'btn btn-lg btn-success mt-5'%>
       <% end %>
     </h3>
   </div>

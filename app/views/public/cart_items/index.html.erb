@@ -1,12 +1,15 @@
 <div class='container px-5 px-sm-0'>
   <div class='row'>
     <div class="col-12">
-  <h3><i class="fa-solid fa-cart-shopping"></i>ショッピングカート</h3>
+
 
   <% if @cart_items.present? %>
-    <%= link_to "カートを空にする", cart_items_path, method: :delete, data: {confirm: 'カートを空にしてよろしいですか？'}, class: "btn btn-danger mb-2" %>
-    <table class="table table-hover table-bordered">
-    <tr>
+  <div class="d-flex mb-3">
+    <h3><i class="fa-solid fa-cart-shopping"></i>ショッピングカート</h3>
+      <%= link_to "カートを空にする", cart_items_path, method: :delete, data: {confirm: 'カートを空にしてよろしいですか？'}, class: "btn btn-danger ml-auto" %>
+    </div>
+    <table class="table table-hover table-bordered col-xs-8">
+    <tr class="bg-light">
       <th>商品名</th>
       <th>単価(税込)</th>
       <th>数量</th>
@@ -19,19 +22,24 @@
       </tr>
     <% end %>
     </table>
-
-    <%= link_to " 買い物を続ける", root_path, class: "btn btn-info mb-3" %>
-
-    <table class="table table-bordered text-right">
-    <tr>
-      <td>合計金額</td>
-      <td id='total_price'>
-        ¥<%= total_price(@cart_items).to_s(:delimited) %>
-      </td>
-    </tr>
+    <div class="col-xs-3">
+      <%= link_to " 買い物を続ける", root_path, class: "btn btn-info mb-3" %>
+    <table align="right" id="cart_index_price" class="table table-bordered ">
+      <thead class="col-md-offset-4">
+        <tr>
+          <td width="100" class="text-left bg-light">合計金額</td>
+          <td id='total_price'>
+            ¥<%= total_price(@cart_items).to_s(:delimited) %>
+          </td>
+        </tr>
+      </thead>
     </table>
-    <%= link_to " 情報入力に進む", new_order_path, class: "btn btn-success center-block" %>
+    </div>
+    <div class="col-md-offset-4 text-center mt-3">
+    <%= link_to " 情報入力に進む", new_order_path, class: "btn btn-lg btn-success center-block" %>
+    </div>
   <% else %>
+    <h3><i class="fa-solid fa-cart-shopping"></i>ショッピングカート</h3>
     <p>お客様のショッピングカートに商品はありません。</p>
     <p><%= link_to "商品一覧", items_path, class: "btn-link" %>から商品をお探し下さい。</p>
   <% end %>

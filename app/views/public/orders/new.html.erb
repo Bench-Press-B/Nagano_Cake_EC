@@ -18,42 +18,50 @@
 
         <h3 class="col-xs-3 font-weight-bold mb-3">お届け先</h3>
           <div class="radio mb-1">
+            <div class="d-flex">
             <%= f.radio_button :addresses, "1", checked: true  %>
-            <span>ご自身の住所</span><br>
+            ご自身の住所
+            </div>
             <!--ここに自分の配送先を入れる-->
-            <%= "〒#{current_customer.postal_code} #{current_customer.address}"%>
+            　　<%= "〒#{current_customer.postal_code} #{current_customer.address}"%>
             <br>
             <!--ここに自分の姓と名前を入れる-->
-            <%= "#{current_customer.full_name}"%>
+            　　<%= "#{current_customer.full_name}"%>
           </div>
 
           <% if @shipping_addresses != [] %>
-          <div class="radio mb-1">
+          <div class="radio mt-3">
+            <div class="d-flex mb-1">
             <%= f.radio_button :addresses, "2" %>  <!--登録してあるshipping_addressesから引っ張ってくる-->
-              <span>登録済住所から選択</span><br>
-            <%= f.collection_select  :address_id, @addresses, :id, :order_address, include_blank: "選択してください" %>
+              登録済住所から選択
+            </div>
+            　<%= f.collection_select  :address_id, @addresses, :id, :order_address, include_blank: "選択してください" %>
           </div>
           <% end %>
 
-          <div class="radio col-xs-10 mt-2">
+          <div class="radio col-xs-10 mt-3">
+            <div class="d-flex mb-1">
             <%= f.radio_button :addresses, "3" %>
-            <span>新しいお届け先</span><br>
-            <div class="col-xs-12 form-group">
-              <%= f.label :"郵便番号(ハイフンなし)", class: "control-label form-control-static" %>
-              <%= f.text_field :postal_code, class: "col-sm-3 form-control-static postal_code",placeholder:"0000000" %>
+            新しいお届け先
             </div>
-            <div class="col-xs-12 form-group">
-              <%= f.label :"住所", class: "control-label form-control-static" %>
-              <%= f.text_field :address, class: "offset-md-2 col-sm-6 form-control-static address",placeholder:"東京都渋谷区代々木神園町0-0",:size =>"100" %>
-            </div>
-            <div class="col-xs-12 form-group">
-              <%= f.label :"宛名", class: "control-label form-control-static" %>
-              <%= f.text_field :name, class: "offset-md-2 col-sm-3 form-control-static ",placeholder:"令和道子" %>
-            </div>
-          </div>
-
-          <div class="btns">
-            <%= f.submit "確認画面へ進む", class:"btn btn-primary col-xs-5 "%>
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <td class="p-0">　<%= f.label :"郵便番号(ハイフンなし)", class: "control-label form-control-static" %></td>
+                  <td class="p-0 pl-3 pb-1"><%= f.text_field :postal_code, class: "col-sm-3 form-control-static postal_code",placeholder:"0000000" %></td>
+                </tr>
+                <tr>
+                  <td class="p-0">　<%= f.label :"住所", class: "control-label form-control-static" %></td>
+                  <td class="p-0 pl-3 pb-1"><%= f.text_field :address, class: "col-sm-6 form-control-static address",placeholder:"東京都渋谷区代々木神園町0-0",:size =>"100" %></td>
+                </tr>
+                <tr>
+                  <td class="p-0">　<%= f.label :"宛名", class: "control-label form-control-static" %></td>
+                  <td class="p-0 pl-3"><%= f.text_field :name, class: "col-sm-3 form-control-static ",placeholder:"令和道子" %></td>
+                </tr>
+              </thead>
+           </table>
+          <div class="col-md-offset-4 text-center mt-3">
+            <%= f.submit "確認画面へ進む", class:"btn btn-lg btn-primary col-xs-5 "%>
           </div>
       <% end %>
     </div>
