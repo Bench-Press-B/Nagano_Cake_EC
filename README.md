@@ -1,4 +1,3 @@
-![person](https://user-images.githubusercontent.com/113087113/203717582-b5cee157-abf2-41c2-96ad-750bad0b4c3b.jpg)
 # Nagano_Cake_EC
 
 ## 概要
@@ -15,7 +14,7 @@
   2. 配送状況や制作状況などをステータスで注文ごとに管理して、顧客と状況を共有できる
 
 ## 設計書
-詳しくはこちらをご覧下さい→[ER図.pdf](https://github.com/Bench-Press-B/Nagano_Cake_EC/files/10081593/ER.drawio.1.pdf)
+詳しくはこちらをご覧下さい→(https://github.com/Bench-Press-B/Nagano_Cake_EC/files/10081593/ER.drawio.1.pdf)
 
 
 ## 機能
