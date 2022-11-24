@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   has_many :order_details, dependent: :destroy
   belongs_to :genre
 
-  validates :name, length: {maximum:50}, uniqueness: true
+  validates :name, length:{maximum:50}, uniqueness: true
   validates :explanation, length:{maximum:200}
 
   def get_image
