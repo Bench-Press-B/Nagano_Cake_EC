@@ -1,5 +1,5 @@
 <th>
-  <%= image_tag cart_item.item.get_image, size: "220x120" %>
+  <%= image_tag cart_item.item.get_image, size: "110x60" %>
   <%= cart_item.item.name %>
 </th>
 <th><%= tax_price(cart_item.item.non_taxed_price).to_s(:delimited) %></th>
