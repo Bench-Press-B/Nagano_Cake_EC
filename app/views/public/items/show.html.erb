@@ -20,8 +20,12 @@
       <%= form_with model:@cart_item, url: cart_items_path, method: :post do |f| %>
         <%= f.hidden_field :item_id, value: @item.id %>
         <%= f.select :quantity, options_for_select((1..10).to_a), {include_blank: "個数選択"}, required: true %>
-        <%# select-box?の種類が違う　%>
-        <%= f.submit "カートに入れる", class: 'btn btn-success ml-5' %>
+        <% if @item.is_active? %>
+          <%= f.submit "カートに入れる", class: 'btn btn-success ml-5' %>
+        <% else %>
+          <%= link_to "販売停止中", items_path, class: 'btn btn-secondary ml-5' %>
+        <% end %>
+
       <% end %>
 
     </div>
