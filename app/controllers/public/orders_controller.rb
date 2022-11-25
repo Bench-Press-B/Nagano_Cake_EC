@@ -54,11 +54,9 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @order = current_customer.orders.new(order_params)
-    @order.save
-
     @cart_items = current_customer.cart_items
     @cart_items.each do |cart_item|
+<<<<<<< HEAD
       @order_detail = OrderDetail.new
       @order_detail.item_id = cart_item.item_id
       @order_detail.order_id = @order.id
@@ -67,8 +65,31 @@ class Public::OrdersController < ApplicationController
       @order_detail.save
       end
     @cart_items.destroy_all
+=======
+      @item = cart_item.item
+    end
+    if @item.is_active?
+      @order = current_customer.orders.new(order_params)
+      @order.save
+>>>>>>> origin/develop
 
-    redirect_to thanx_orders_path
+      @cart_items.each do |cart_item|
+        @order_detail = OrderDetail.new
+        @order_detail.item_id = cart_item.item_id
+        @order_detail.order_id = @order.id
+        @order_detail.quantity = cart_item.quantity
+        @order_detail.taxed_price = cart_item.item.non_taxed_price * 1.1
+        @order_detail.save
+      end
+
+      @cart_items.destroy_all
+
+      redirect_to thanx_orders_path
+
+    else
+      redirect_to cart_items_path
+      flash[:notice]="販売停止中の商品が含まれています。"
+    end
   end
 
   private
