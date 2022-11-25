@@ -2,7 +2,7 @@ class ShippingAddress < ApplicationRecord
 
   belongs_to :customer
   
-  validates :postal_code, presence: true
+  validates :postal_code, presence: true, numericality: true
   validates :name, presence: true
   validates :address, presence: true
 

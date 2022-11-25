@@ -36,9 +36,10 @@ Rails.application.routes.draw do
 
   #public
   scope module: :public do
-    resources :customers, only:[:show,:edit,:update] do
+    resource :customers, only:[:show] do
      collection do
-       
+       patch "information/update" => "customers#update", as:"update"
+       get "information/edit" => "customers#edit", as:"edit"
        get 'unsubscribe'
        patch 'withdraw'
      end

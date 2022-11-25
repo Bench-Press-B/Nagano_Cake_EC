@@ -11,7 +11,7 @@
         <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
           <li>
-            <%= link_to "マイページ", customer_path(current_customer), class: 'btn nav-link text-light mr-5' %>
+            <%= link_to "マイページ", customers_path, class: 'btn nav-link text-light mr-5' %>
           </li>
           <li>
             <%= link_to "商品一覧", items_path, class: 'btn nav-link text-light mr-5' %>

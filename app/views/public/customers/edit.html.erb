@@ -1,8 +1,16 @@
 <div class="container">
    <h4 class="col-3 bg-light text-center">会員情報編集</h4>
+   <% if @customer.errors.any? %>
+  <%= @customer.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @customer.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
    <div class="row">
     <div class="col-sm-10">
-    <%= form_with model: @customer,url:customer_path(@customer), method: :patch , local:true do |f| %>
+    <%= form_with model: @customer,url:update_customers_path, method: :patch , local:true do |f| %>
     <table class="table table-borderless">
      <tr>
        <th><%= f.label :"氏名" %></th>
