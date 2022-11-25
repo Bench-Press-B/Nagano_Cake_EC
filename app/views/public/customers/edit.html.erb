@@ -1,40 +1,47 @@
 <div class="container">
-   <h2>会員情報編集</h2>
+   <h4 class="col-3 bg-light text-center">会員情報編集</h4>
    <div class="row">
-    <div class="offset-md-2 col-md-6 px-5 px-sm-0 mt-3 text-nowrap">
+    <div class="col-sm-10">
     <%= form_with model: @customer,url:customer_path(@customer), method: :patch , local:true do |f| %>
     <table class="table table-borderless">
      <tr>
        <th><%= f.label :"氏名" %></th>
-       <td><%= f.text_field :first_name, required: true, class: "form-control" %></td>
+       <td class="col-sm-3"><%= f.text_field :first_name, required: true, class: "form-control" %></td>
        <td><%= f.text_field :last_name, required: true, class: "form-control" %></td>
+       <td class="col-sm-3"></td>
      </tr>
      <tr>
        <th><%= f.label :"フリガナ" %></th>
        <td><%= f.text_field :kana_first_name, required: true, class: "form-control" %></td>
        <td><%= f.text_field :kana_last_name, required: true, class: "form-control" %></td>
+       <td></td>
      </tr>
      <tr>
        <th><%= f.label :"郵便番号" %></th>
        <td><%= f.text_field :postal_code, required: true, class: "form-control" %></td>
+       <td></td>
      </tr>
      <tr>
        <th><%= f.label :"住所" %></th>
-       <td><%= f.text_field :address, required: true, class: "form-control" %></td>
+       <td colspan="3"><%= f.text_field :address, required: true, class: "form-control" %></td>
+       <td></td>
      </tr>
      <tr>
        <th><%= f.label :"電話番号" %></th>
        <td><%= f.text_field :phone_number, required: true, class: "form-control" %></td>
+       <td></td>
      </tr>
      <tr>
        <th><%= f.label :"メールアドレス" %></th>
        <td><%= f.text_field :email, required: true, class: "form-control" %></td>
+       <td></td>
      </tr>
      <tr>
       <td></td>
       <td><%= f.submit"変更内容を保存", class: 'btn btn-success' %></td>
       <% end %>
       <td><%= link_to "退会する", unsubscribe_customers_path, class: "btn btn-danger" %></td>
+      <td></td>
      </tr>
     </table>
    </div>
