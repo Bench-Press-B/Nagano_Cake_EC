@@ -1,6 +1,6 @@
 <div class='container px-5 px-sm-0'>
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-sm-12">
     <h2 class="head-line title_h2 mb-3"><i class="fa-solid fa-pen-to-square"></i>注文情報入力</h2>
     <% if current_customer.cart_items.present? %>
     <%= render 'layouts/errors', obj: @order %>
@@ -30,12 +30,12 @@
           </div>
 
           <% if @shipping_addresses != [] %>
-          <div class="radio mt-3">
-            <div class="d-flex mb-1">
+          <div class="radio mt-3" >
+            <div class="d-flex mb-1 ">
             <%= f.radio_button :addresses, "2" %>  <!--登録してあるshipping_addressesから引っ張ってくる-->
               登録済住所から選択
             </div>
-            　<%= f.collection_select  :address_id, @addresses, :id, :order_address, include_blank: "選択してください" %>
+            　<%= f.collection_select  :address_id, @addresses, :id, :order_address, { prompt: '選択してください' }, class:"col-sm-8"  %>
           </div>
           <% end %>
 
@@ -47,7 +47,7 @@
             <table class="table table-borderless">
               <thead>
                 <tr>
-                  <td class="p-0">　<%= f.label :"郵便番号(ハイフンなし)", class: "control-label form-control-static" %></td>
+                  <td class="p-0">　<%= f.label :"郵便番号(ハイフンなし)", class: "control-label form-control-static " %></td>
                   <td class="p-0 pl-3 pb-1"><%= f.text_field :postal_code, class: "col-sm-3 form-control-static postal_code",placeholder:"0000000" %></td>
                 </tr>
                 <tr>
