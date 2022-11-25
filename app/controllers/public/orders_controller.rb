@@ -8,14 +8,16 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_customer.orders.all
+    @orders = current_customer.orders.page(params[:page]).per(10)
     @order_detail = OrderDetail.where(customer:current_customer)
-    @item = Item.where(customer:current_customer)
   end
 
   def show
     @order = Order.find(params[:id])
     @order_details = @order.order_details
+    @sum = 0
+    @subtotals = @order_details.map { |order_details| order_details.taxed_price * order_details.quantity }
+    @sum = @subtotals.sum
   end
 
   def thanx
@@ -63,7 +65,7 @@ class Public::OrdersController < ApplicationController
       @order_detail.item_id = cart_item.item_id
       @order_detail.order_id = @order.id
       @order_detail.quantity = cart_item.quantity
-      @order_detail.taxed_price = (cart_item.item.non_taxed_price * 1.1) * cart_item.quantity
+      @order_detail.taxed_price = cart_item.item.non_taxed_price * 1.1
       @order_detail.save
       end
     @cart_items.destroy_all

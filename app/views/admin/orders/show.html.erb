@@ -38,9 +38,9 @@
           <% @order.order_details.each do |order_detail| %>
             <tr>
               <td><%= order_detail.item.name%></td>
-              <td><%= tax_price(order_detail.item.non_taxed_price).to_s(:delimited) %></td>
+              <td><%= order_detail.taxed_price.floor.to_s(:delimited) %></td>
               <td><%= order_detail.quantity %></td>
-              <td><%= subtotal(order_detail).to_s(:delimited)%></td>
+              <td><%= (order_detail.taxed_price * order_detail.quantity.floor).to_s(:delimited) %></td>
               <td>
                 <%= form_with(model: order_detail, url: admin_order_details_path(order_detail.id),method: :patch, local: true) do |f|%>
                 <%= f.select :status, OrderDetail.statuses.keys, class:"making_status"%>
@@ -59,11 +59,11 @@
           </tr>
           <tr>
             <th>商品合計</th>
-            <td class="text-right col-xs-5">¥<%= total_price(@order.order_details).to_s(:delimited)%></td>
+            <td class="text-right col-xs-5">¥<%= @sum.to_s(:delimited) %></td>
           </tr>
           <tr>
             <th>請求金額</th>
-            <td class="text-right col-xs-5">¥<%= (total_price(@order.order_details) + @order.postage).to_s(:delimited)%></td>
+            <td class="text-right col-xs-5">¥<%= @order.total_price.to_s(:delimited) %></td>
           </tr>
           <tr>
             <th></th>
