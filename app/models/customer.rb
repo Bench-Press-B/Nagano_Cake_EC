@@ -6,9 +6,9 @@ class Customer < ApplicationRecord
          
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :kana_first_name, presence: true
-  validates :kana_last_name, presence: true
-  validates :postal_code, presence: true
+  validates :kana_first_name, presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい。'}
+  validates :kana_last_name, presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい。'}
+  validates :postal_code, presence: true, numericality: true
   validates :phone_number, presence: true
   validates :address, presence: true
   validates :email, presence: true
