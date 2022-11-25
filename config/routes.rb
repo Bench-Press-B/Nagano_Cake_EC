@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   scope module: :public do
     resources :customers, only:[:show,:edit,:update] do
      collection do
+       
        get 'unsubscribe'
        patch 'withdraw'
      end
