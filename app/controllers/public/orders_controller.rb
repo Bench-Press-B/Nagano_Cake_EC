@@ -67,8 +67,12 @@ class Public::OrdersController < ApplicationController
     @cart_items.destroy_all
 =======
       @item = cart_item.item
+      if !@item.is_active?
+        redirect_to cart_items_path
+        flash[:notice]="販売停止中の商品が含まれています。"
+        return
+      end
     end
-    if @item.is_active?
       @order = current_customer.orders.new(order_params)
       @order.save
 >>>>>>> origin/develop
@@ -85,11 +89,6 @@ class Public::OrdersController < ApplicationController
       @cart_items.destroy_all
 
       redirect_to thanx_orders_path
-
-    else
-      redirect_to cart_items_path
-      flash[:notice]="販売停止中の商品が含まれています。"
-    end
   end
 
   private
