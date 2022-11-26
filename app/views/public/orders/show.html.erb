@@ -1,0 +1,69 @@
+<div class="container">
+  <h4 class="col-2 bg-light text-center">注文履歴詳細</h4>
+  <div class="row">
+    <div class="col-md-9">
+      <strong>注文情報</strong>
+       <table class ="table table-bordered">
+        <tr>
+          <td class="bg-light">注文日</td>
+          <td><%= @order.created_at.strftime('%Y/%m/%d')  %></td>
+        </tr>
+        <tr>
+          <td class="bg-light">配送先</td>
+          <td>〒<%= @order.postal_code %><br>
+            <%= @order.address %><br>
+            <%= @order.name %></td>
+        </tr>
+        <tr>
+          <td class="bg-light">支払方法</td>
+          <td><%= @order.payment_method %></td>
+        </tr>
+        <tr>
+          <td class="bg-light">ステータス</td>
+          <td><%= @order.status %></td>
+        </tr>
+       </table>
+    </div>
+
+    <div class ="col-md-3">
+     <strong>請求情報</strong>
+      <table class ="table table-bordered">
+        <tr>
+          <td class="bg-light">商品合計</td>
+          <td><%= @sum.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <td class="bg-light">配送料</td>
+          <td><%= @order.postage %></td>
+        </tr>
+        <tr>
+          <td class="bg-light"><strong>ご請求額</strong></td>
+          <td><%= @order.total_price.to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-10">
+      <strong>注文内容</strong>
+    <table class ="table table-bordered">
+      <thead>
+        <tr class="bg-light">
+          <td style="width:55%">商品</td>
+          <td style="width:21%">単価(税込)</td>
+          <td style="width:12%">個数</td>
+          <td style="width:12%">小計</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.order_details.each do |order| %>
+        <tr>
+          <td><%= order.item.name %></td>
+          <td><%= order.taxed_price.floor.to_s(:delimited) %></td>
+          <td><%= order.quantity %></td>
+          <td><%= (order.taxed_price * order.quantity.floor).to_s(:delimited) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>

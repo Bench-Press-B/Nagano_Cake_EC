@@ -1,0 +1,17 @@
+<%= form_with model: address, local:true do |f| %>
+ <table class="table table-borderless">
+   <tr>
+    <td class="col-sm-4 p-1"><%= f.label :postal_code,"郵便番号(ハイフンなし)" %></td>
+    <td class="p-1"><%= f.text_field :postal_code, required: true, class: 'form-control col-sm-6',placeholder:"0000000" %></td>
+   </tr>
+   <tr>
+     <td class="p-1"><%= f.label :address,"住所" %></td>
+     <td class="p-1"><%= f.text_field :address, required: true, class: 'form-control',placeholder:"東京都渋谷区代々木神園町0-0" %></td>
+   </tr>
+   <tr>
+     <td class="p-1"><%= f.label :name,"宛名" %></td>
+     <td class="p-1"><%= f.text_field :name, required: true, class: 'form-control col-sm-6',placeholder:"令和道子" %></td>
+     <td class="p-1"><%= f.submit"新規登録" , required: true,class: 'btn btn-success col-8' %></td>
+   </tr>
+ </table>
+<% end %>

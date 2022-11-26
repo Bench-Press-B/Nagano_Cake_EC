@@ -1,0 +1,15 @@
+<th>
+  <%= image_tag cart_item.item.get_image, size: "100x80" %>
+  <%= cart_item.item.name %>
+</th>
+<th class="align-middle"><%= tax_price(cart_item.item.non_taxed_price).to_s(:delimited) %></th>
+<th class="align-middle">
+  <%= form_with model:cart_item, url: cart_item_path(cart_item), method: :patch  do |f| %>
+  <%= f.number_field :quantity, size: 10, min: 1 %>
+  <%= f.submit "変更", class: "btn btn-success" %>
+  <% end %>
+</th>
+<th class="align-middle"><%= subtotal(cart_item).to_s(:delimited, delimiter: ',') %></th>
+<th class="align-middle">
+  <%= link_to " 削除する", cart_item_path(cart_item), method: :delete, data: {confirm: "#{cart_item.item.name}を削除してよろしいですか？"}, class: "btn btn-danger" %>
+</th>
